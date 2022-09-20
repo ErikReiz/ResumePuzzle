@@ -23,7 +23,7 @@ namespace ResumePuzzle.UI.Presenter
 		public void StartGame()
 		{
 			Close();
-			UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+			UnityEngine.SceneManagement.SceneManager.LoadScene(1);
 		}
 
 		public void OpenSettings()

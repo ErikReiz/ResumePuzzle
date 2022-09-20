@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/ResumePuzzle/Scene/MainMenu.unity
+    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
+  - enabled: 1
     path: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Scene/SC Pixel Art Top
       Down - Basic.unity
     guid: 86e89bd9e4a9c5245a015cf17e3c0aae
