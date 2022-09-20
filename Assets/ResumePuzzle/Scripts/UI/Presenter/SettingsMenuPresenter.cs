@@ -104,6 +104,7 @@ namespace ResumePuzzle.UI.Presenter
 
 		public void ChangeResolution(int resolutionID)
 		{
+			Debug.Log(resolutions.Length);
 			Resolution resolution = resolutions[resolutionID];
 			Screen.SetResolution(resolution.width, resolution.height, true);
 		}

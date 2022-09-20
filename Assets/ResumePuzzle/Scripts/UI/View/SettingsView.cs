@@ -65,7 +65,7 @@ namespace ResumePuzzle.UI.View
 			resolutionDropdown.ClearOptions();
 
 			resolutionDropdown.AddOptions(resolutions);
-			resolutionDropdown.value = 1;
+			resolutionDropdown.value = currentResolutionIndex;
 
 			resolutionDropdown.RefreshShownValue();
 		}
