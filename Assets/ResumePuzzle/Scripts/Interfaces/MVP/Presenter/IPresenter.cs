@@ -7,8 +7,5 @@ namespace ResumePuzzle.Interfaces
 		void Close();
 		#endregion
 	}
-
-	public interface ISettingsPresenter : IPresenter
-	{}
 }
 

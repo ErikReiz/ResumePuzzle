@@ -4,7 +4,15 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Scene/SC Pixel Art Top
+      Down - Basic.unity
+    guid: 86e89bd9e4a9c5245a015cf17e3c0aae
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 16450ad31c9f9c94e99e6d3a9697cf44,
+      type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,
+      guid: 1861a4bfed9f7a2448a212f7e55d5f64, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: bf4cbd73bf40a82428fd6b9d1e171f07, type: 2}

@@ -1,5 +1,6 @@
-using UnityEngine;
 using Zenject;
+using UnityEngine;
+using UnityEngine.Audio;
 using ResumePuzzle.Interfaces;
 using ResumePuzzle.UI.Presenter;
 using ResumePuzzle.UI.View;
@@ -11,18 +12,22 @@ namespace ResumePuzzle.Containers
         #region SERIALIZABLE FIELDS
         [SerializeField] private MenuView menuView;
 	    [SerializeField] private SettingsView settingsView;
-	    #endregion
+        [SerializeField] private AudioMixer audioMixer;    
+        #endregion
 
 	    public override void InstallBindings()
-        {
-            Container.Bind<IMenuView>().FromInstance(menuView).AsSingle();
-            Container.Bind<ISettingsView>().FromInstance(settingsView).AsSingle();  
-        
-            Container.Bind<IPresenter>().To<MainMenuPresenter>()
-                .AsSingle().WithConcreteId("MMP").NonLazy();
+        {   
+            Container.Bind<IView>().FromInstance(menuView)
+                .AsCached().WhenInjectedInto<MainMenuPresenter>();
 
-            Container.Bind<IPresenter>().To<SettingsMenuPresenter>().FromNew()
-                .AsSingle().WithConcreteId("SMP");
+            Container.Bind<ISettingsView>().FromInstance(settingsView).AsCached();
+
+            Container.Bind<IMenuPresenter>().To<MainMenuPresenter>().AsCached().NonLazy();
+            Container.Bind<ISettingsPresenter>().To<SettingsMenuPresenter>().AsCached().NonLazy();
+
+            Container.Bind<AudioMixer>().FromInstance(audioMixer);
+
+            Container.Resolve<IMenuPresenter>().Run();
         }
     }
 }

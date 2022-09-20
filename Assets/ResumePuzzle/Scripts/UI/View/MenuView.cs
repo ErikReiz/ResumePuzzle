@@ -3,10 +3,11 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.Events;
 using ResumePuzzle.Interfaces;
+using Zenject;
 
 namespace ResumePuzzle.UI.View
 {
-	public class MenuView : MonoBehaviour, IMenuView
+	public class MenuView : MonoBehaviour, IView
 	{
 		#region SERIALIZABLE FIELDS
 		[Header("Button")]
@@ -18,29 +19,32 @@ namespace ResumePuzzle.UI.View
 		[SerializeField] private float tweeningLength = 0.3f;
 		#endregion
 
-		#region PROPERTIES
-		public UnityAction OnPlayButtonClicked { set { playGameButton.onClick.AddListener(value); } }
-		public UnityAction OnSettingsButtonClicked { set { settingsButton.onClick.AddListener(value); } }
-		public UnityAction OnQuitButtonClicked { set { quitGameButton.onClick.AddListener(value); } }
+		#region FIELDS
+		[Inject] private IMenuPresenter menuPresenter;
 		#endregion
+
+		private void OnEnable()
+		{
+			playGameButton.onClick.AddListener(menuPresenter.StartGame);
+			settingsButton.onClick.AddListener(menuPresenter.OpenSettings);
+			playGameButton.onClick.AddListener(menuPresenter.QuitGame);
+		}
 
 		private void OnDisable()
 		{
-			playGameButton.onClick.RemoveAllListeners();
-			settingsButton.onClick.RemoveAllListeners();
-			quitGameButton.onClick.RemoveAllListeners();
+			playGameButton.onClick.RemoveListener(menuPresenter.StartGame);
+			settingsButton.onClick.RemoveListener(menuPresenter.OpenSettings);
+			playGameButton.onClick.RemoveListener(menuPresenter.QuitGame);
 		}
 
 		public async void Show()
 		{
-			gameObject.SetActive(true);
 			await transform.DOLocalMoveX(0, tweeningLength).AsyncWaitForCompletion();
 		}
 
 		public async void Hide()
 		{
 			await transform.DOLocalMoveX(IView.offScreenCoordinates, tweeningLength).AsyncWaitForCompletion();
-			gameObject.SetActive(false);
 		}
 	}
 }
