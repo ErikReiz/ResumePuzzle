@@ -3,10 +3,21 @@ using UnityEngine.EventSystems;
 
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
+    #region SERIALIZABLE FIELDS
+    [SerializeField] private float handleRange = 1;
+    [SerializeField] private float deadZone = 0;
+    [SerializeField] private AxisOptions axisOptions = AxisOptions.Both;
+    [SerializeField] private bool snapX = false;
+    [SerializeField] private bool snapY = false;
+
+    [SerializeField] protected RectTransform background = null;
+    [SerializeField] private RectTransform handle = null;
+    #endregion
+
+    #region PROPERTIES
     public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
     public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
-
     public float HandleRange
     {
         get { return handleRange; }
@@ -18,25 +29,19 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         get { return deadZone; }
         set { deadZone = Mathf.Abs(value); }
     }
+    #endregion
 
+    #region FIELDS
     public AxisOptions AxisOptions { get { return AxisOptions; } set { axisOptions = value; } }
-    public bool SnapX { get { return snapX; } set { snapX = value; } }
-    public bool SnapY { get { return snapY; } set { snapY = value; } }
+    protected bool SnapX { get { return snapX; } set { snapX = value; } }
+    protected bool SnapY { get { return snapY; } set { snapY = value; } }
 
-    [SerializeField] private float handleRange = 1;
-    [SerializeField] private float deadZone = 0;
-    [SerializeField] private AxisOptions axisOptions = AxisOptions.Both;
-    [SerializeField] private bool snapX = false;
-    [SerializeField] private bool snapY = false;
-
-    [SerializeField] protected RectTransform background = null;
-    [SerializeField] private RectTransform handle = null;
     private RectTransform baseRect = null;
-
     private Canvas canvas;
     private Camera cam;
 
     private Vector2 input = Vector2.zero;
+    #endregion
 
     protected virtual void Start()
     {
