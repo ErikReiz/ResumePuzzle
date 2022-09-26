@@ -1,9 +1,8 @@
+using Zenject;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.Events;
 using ResumePuzzle.Interfaces;
-using Zenject;
 
 namespace ResumePuzzle.UI.View
 {
@@ -27,14 +26,14 @@ namespace ResumePuzzle.UI.View
 		{
 			playGameButton.onClick.AddListener(menuPresenter.StartGame);
 			settingsButton.onClick.AddListener(menuPresenter.OpenSettings);
-			playGameButton.onClick.AddListener(menuPresenter.QuitGame);
+			quitGameButton.onClick.AddListener(menuPresenter.QuitGame);
 		}
 
 		private void OnDisable()
 		{
 			playGameButton.onClick.RemoveListener(menuPresenter.StartGame);
 			settingsButton.onClick.RemoveListener(menuPresenter.OpenSettings);
-			playGameButton.onClick.RemoveListener(menuPresenter.QuitGame);
+			quitGameButton.onClick.RemoveListener(menuPresenter.QuitGame);
 		}
 
 		public async void Show()

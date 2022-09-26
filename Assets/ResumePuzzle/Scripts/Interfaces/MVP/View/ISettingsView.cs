@@ -1,14 +1,11 @@
-using ResumePuzzle.Interfaces;
-using System.Collections.Generic;
+using ResumePuzzle.Data;
 
 namespace ResumePuzzle.Interfaces
 {
 	public interface ISettingsView : IView
 	{
 		#region METHODS
-		void UpdateResolutionsMenu(List<string> resolutions, int currentResolutionIndex);
-		void SetSoundSlider(float volume);
-		void SetMusicSlider(float volume);
+		void SetSettingsView(SettingsPresset settingsPresset);
 		#endregion
 	}
 }

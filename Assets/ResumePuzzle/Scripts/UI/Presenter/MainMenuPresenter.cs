@@ -8,6 +8,7 @@ namespace ResumePuzzle.UI.Presenter
 		#region FIELDS
 		[Inject] private IView menuView;
 		[Inject] private ISettingsPresenter settingsPresenter;
+		[Inject] private IInterstitialAds interstitialAds;
 		#endregion
 
 		public void Run()
@@ -22,6 +23,7 @@ namespace ResumePuzzle.UI.Presenter
 
 		public void StartGame()
 		{
+			interstitialAds.ShowInterstitialAds();
 			Close();
 			UnityEngine.SceneManagement.SceneManager.LoadScene(1);
 		}

@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using ResumePuzzle.Interfaces;
 using System.Collections.Generic;
+using ResumePuzzle.Data;
 
 namespace ResumePuzzle.UI.View
 {
@@ -13,8 +14,8 @@ namespace ResumePuzzle.UI.View
 		#region SERIALIZABLE FIELDS
 		[Header("Settings")]
 		[SerializeField] private Button backButton;
-		[SerializeField] private TMP_Dropdown resolutionDropdown;
-		[SerializeField] private TMP_Dropdown graphicsDropdown;
+		[SerializeField] private Slider resolutionSlider;
+		[SerializeField] private TMP_Dropdown qualityDropdown;
 		[SerializeField] private Slider soundSlider;
 		[SerializeField] private Slider musicSlider;
 
@@ -28,12 +29,9 @@ namespace ResumePuzzle.UI.View
 
 		private void OnEnable()
 		{
-			SetCurrentGraphicsTier();
-
 			backButton.onClick.AddListener(settingsPresenter.BackToMenu);
-
-			resolutionDropdown.onValueChanged.AddListener(settingsPresenter.ChangeResolution);
-			graphicsDropdown.onValueChanged.AddListener(settingsPresenter.ChangeGraphicPresset);
+			resolutionSlider.onValueChanged.AddListener(settingsPresenter.ChangeResolutionScale);
+			qualityDropdown.onValueChanged.AddListener(settingsPresenter.ChangeGraphicPresset);
 
 			soundSlider.onValueChanged.AddListener(settingsPresenter.ChangeSoundVolume);
 			musicSlider.onValueChanged.AddListener(settingsPresenter.ChangeMusicVolume);
@@ -41,13 +39,12 @@ namespace ResumePuzzle.UI.View
 
 		private void OnDisable()
 		{
-			backButton.onClick.AddListener(settingsPresenter.BackToMenu);
-		}
+			backButton.onClick.RemoveListener(settingsPresenter.BackToMenu);
+			resolutionSlider.onValueChanged.RemoveListener(settingsPresenter.ChangeResolutionScale);
+			qualityDropdown.onValueChanged.RemoveListener(settingsPresenter.ChangeGraphicPresset);
 
-		private void SetCurrentGraphicsTier()
-		{
-			graphicsDropdown.value = (int)Graphics.activeTier;
-			graphicsDropdown.RefreshShownValue();
+			soundSlider.onValueChanged.RemoveListener(settingsPresenter.ChangeSoundVolume);
+			musicSlider.onValueChanged.RemoveListener(settingsPresenter.ChangeMusicVolume);
 		}
 
 		public async void Show()
@@ -60,24 +57,14 @@ namespace ResumePuzzle.UI.View
 			await transform.DOLocalMoveX(-IView.offScreenCoordinates, tweeningLength).AsyncWaitForCompletion();
 		}
 
-		public void UpdateResolutionsMenu(List<string> resolutions, int currentResolutionIndex)
+		public void SetSettingsView(SettingsPresset settingsPresset)
 		{
-			resolutionDropdown.ClearOptions();
+			resolutionSlider.value = settingsPresset.ResolutionScale;
+			qualityDropdown.value = settingsPresset.QualityPresset;
+			soundSlider.value = settingsPresset.SoundVolume;
+			musicSlider.value = settingsPresset.MusicVolume;
 
-			resolutionDropdown.AddOptions(resolutions);
-			resolutionDropdown.value = currentResolutionIndex;
-
-			resolutionDropdown.RefreshShownValue();
-		}
-
-		public void SetSoundSlider(float volume)
-		{
-			soundSlider.value = volume;
-		}
-
-		public void SetMusicSlider(float volume)
-		{
-			musicSlider.value = volume;
+			qualityDropdown.RefreshShownValue();
 		}
 	}
 }

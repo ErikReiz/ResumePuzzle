@@ -2,8 +2,9 @@ using Zenject;
 using UnityEngine;
 using UnityEngine.Audio;
 using ResumePuzzle.Interfaces;
-using ResumePuzzle.UI.Presenter;
 using ResumePuzzle.UI.View;
+using ResumePuzzle.UI.Model;
+using ResumePuzzle.UI.Presenter;
 
 namespace ResumePuzzle.Containers
 {
@@ -17,9 +18,10 @@ namespace ResumePuzzle.Containers
 
 	    public override void InstallBindings()
         {   
+            Container.Bind<ISaveSettingsModel>().To<SaveSettingsModel>().AsCached().NonLazy(); 
+
             Container.Bind<IView>().FromInstance(menuView)
                 .AsCached().WhenInjectedInto<MainMenuPresenter>();
-
             Container.Bind<ISettingsView>().FromInstance(settingsView).AsCached();
 
             Container.Bind<IMenuPresenter>().To<MainMenuPresenter>().AsCached().NonLazy();
@@ -27,7 +29,13 @@ namespace ResumePuzzle.Containers
 
             Container.Bind<AudioMixer>().FromInstance(audioMixer);
 
+            RunFuncOnBinded();
+        }
+
+        private void RunFuncOnBinded()
+		{
             Container.Resolve<IMenuPresenter>().Run();
+            Container.Resolve<ISettingsPresenter>().LoadSettings();
         }
     }
 }

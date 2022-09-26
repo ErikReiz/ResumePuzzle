@@ -1,10 +1,8 @@
 using Zenject;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Rendering;
+using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace ResumePuzzle.UI.Presenter
@@ -27,101 +25,93 @@ namespace ResumePuzzle.UI.Presenter
 		#region FIELDS
 		[Inject] private ISettingsView settingsView;
 		[Inject] private IMenuPresenter menuPresenter;
+		[Inject] private ISaveSettingsModel saveSettingsModel;
 		[Inject] private AudioMixer audioMixer;
 
-		private Resolution[] resolutions;
+		private SettingsPresset settingsPresset;
 		#endregion
 
-		public SettingsMenuPresenter()
+		private void LoadSettings(SettingsPresset? presset)
 		{
-			Task.Run(GetAvailableResolutions)
-				.ContinueWith(resolutionTaskOutput =>
-				{
-					ResolutionTaskOutput taskOutput = resolutionTaskOutput.Result;
-					settingsView.UpdateResolutionsMenu(taskOutput.resolutionsString, taskOutput.currentResolutionIndex);
-				});
+			if (presset != null)
+			{
+				settingsPresset = presset.Value;
+
+				QualitySettings.currentLevel = (QualityLevel)settingsPresset.QualityPresset;
+				QualitySettings.resolutionScalingFixedDPIFactor = settingsPresset.ResolutionScale;
+				audioMixer.SetFloat(soundGroup, settingsPresset.SoundVolume);
+				audioMixer.SetFloat(musicGroup, settingsPresset.MusicVolume);
+
+				settingsView.SetSettingsView(settingsPresset);
+			}
+			else
+			{
+				settingsPresset = new();
+			}
 		}
 
-		private Task<ResolutionTaskOutput> GetAvailableResolutions()
+		private void SaveSettings()
 		{
-			if(resolutions != null) { return null; }
+			settingsPresset.ResolutionScale = QualitySettings.resolutionScalingFixedDPIFactor;
+			settingsPresset.QualityPresset = (int)QualitySettings.currentLevel;
 
-			resolutions = Screen.resolutions;
-			ResolutionTaskOutput resolutionTaskOutput = new();
+			settingsPresset.SoundVolume = GetVolumeOfGroup(soundGroup);
+			settingsPresset.MusicVolume = GetVolumeOfGroup(musicGroup);
 
-			StringBuilder builder = new();
+			saveSettingsModel.SaveGame(settingsPresset);
 			
-			foreach(Resolution resolution in resolutions)
-			{
-				builder.Clear();
-
-				builder.Append(resolution.width);
-				builder.Append("X");
-				builder.Append(resolution.height);
-
-				resolutionTaskOutput.resolutionsString.Add(builder.ToString());
-			}
-
-			return Task.FromResult<ResolutionTaskOutput>(resolutionTaskOutput);
 		}
 
 		private float GetVolumeOfGroup(string audioGroup)
 		{
 			audioMixer.GetFloat(audioGroup, out float volume);
-			volume /= 20;
-			volume = Mathf.Pow(10, volume);
 
 			return volume;
 		}
 
-		private void SetSliders()
-		{
-			float soundSlider = GetVolumeOfGroup(soundGroup);
-			float musicSlider = GetVolumeOfGroup(musicGroup);
-
-			settingsView.SetSoundSlider(soundSlider);
-			settingsView.SetMusicSlider(musicSlider);
-		}
-
 		public void Run()
 		{
-
 			settingsView.Show();
-			SetSliders();
 		}
 
 		public void Close()
 		{
+			SaveSettings();
 			settingsView.Hide();
+		}
+
+		
+		public void LoadSettings()
+		{
+			LoadSettings(saveSettingsModel.LoadSettings());
 		}
 
 		public void BackToMenu()
 		{
 			Close();
 			menuPresenter.Run();
-			PlayerPrefs.Save();
 		}
 
-		public void ChangeResolution(int resolutionID)
+		public void ChangeResolutionScale(float scale)
 		{
-			Debug.Log(resolutions.Length);
-			Resolution resolution = resolutions[resolutionID];
-			Screen.SetResolution(resolution.width, resolution.height, true);
+			QualitySettings.resolutionScalingFixedDPIFactor = scale;
 		}
 
 		public void ChangeGraphicPresset(int pressetID)
 		{
-			Graphics.activeTier = (GraphicsTier)pressetID;
+			float dpi = QualitySettings.resolutionScalingFixedDPIFactor;
+			QualitySettings.currentLevel = (QualityLevel)pressetID;
+			QualitySettings.resolutionScalingFixedDPIFactor = dpi;
 		}
 
 		public void ChangeSoundVolume(float volume)
 		{
-			audioMixer.SetFloat(soundGroup, Mathf.Log10(volume) * 20);
+			audioMixer.SetFloat(soundGroup, volume);
 		}
 
 		public void ChangeMusicVolume(float volume)
 		{
-			audioMixer.SetFloat(musicGroup, Mathf.Log10(volume) * 20);
+			audioMixer.SetFloat(musicGroup, volume);
 		}
 	}
 }
