@@ -7,15 +7,12 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/ResumePuzzle/Scene/MainMenu.unity
-    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
+    guid: 0336421a6f680a24fbd1823c7ba2c8fc
   - enabled: 1
-    path: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Scene/SC Pixel Art Top
-      Down - Basic.unity
+    path: Assets/ResumePuzzle/Scene/IntroLevel.unity
     guid: 86e89bd9e4a9c5245a015cf17e3c0aae
   m_configObjects:
-    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 16450ad31c9f9c94e99e6d3a9697cf44,
-      type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,
-      guid: 1861a4bfed9f7a2448a212f7e55d5f64, type: 2}
+      guid: ca095505cb6d43d49a2e1235945c6028, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
-      guid: bf4cbd73bf40a82428fd6b9d1e171f07, type: 2}
+      guid: a36799f6cfc808b49a2282e08250879b, type: 2}

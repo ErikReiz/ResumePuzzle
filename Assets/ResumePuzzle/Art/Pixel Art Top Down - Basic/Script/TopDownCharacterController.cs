@@ -18,7 +18,7 @@ namespace Cainos.PixelArtTopDown_Basic
         private void Update()
         {
             Vector2 dir = joystick.Direction;
-            Debug.Log(joystick.AxisOptions);
+
             animator.SetBool("IsMoving", dir.magnitude > 0);
             animator.SetFloat("DirectionX", dir.x);
             animator.SetFloat("DirectionY", dir.y);

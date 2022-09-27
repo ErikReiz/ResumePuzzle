@@ -1,5 +1,5 @@
-using ResumePuzzle.Interfaces;
 using Zenject;
+using ResumePuzzle.Interfaces;
 
 namespace ResumePuzzle.UI.Presenter
 {
@@ -23,7 +23,7 @@ namespace ResumePuzzle.UI.Presenter
 
 		public void StartGame()
 		{
-			interstitialAds.ShowInterstitialAds();
+			//interstitialAds.ShowInterstitialAds();
 			Close();
 			UnityEngine.SceneManagement.SceneManager.LoadScene(1);
 		}

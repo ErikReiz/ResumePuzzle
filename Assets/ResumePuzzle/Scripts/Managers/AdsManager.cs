@@ -18,8 +18,13 @@ namespace ResumePuzzle.Managers
 
 		public AdsManager()
 		{
-			Advertisement.Initialize(androidGameID, true, false, this);
+			Advertisement.Initialize(androidGameID, true, this);
 		}
+
+		public void ShowInterstitialAds()
+		{
+			interstitialShower.ShowAds();
+		}	
 		
 		#region INITIALIZATION
 		public void OnInitializationComplete()
@@ -32,10 +37,6 @@ namespace ResumePuzzle.Managers
 			
 		}
 
-		public void ShowInterstitialAds()
-		{
-			interstitialShower.ShowAds();
-		}
 		#endregion
 
 
