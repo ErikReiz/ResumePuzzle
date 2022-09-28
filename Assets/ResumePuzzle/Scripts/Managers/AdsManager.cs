@@ -9,7 +9,9 @@ namespace ResumePuzzle.Managers
 	public class AdsManager : IUnityAdsInitializationListener, IInterstitialAds
 	{
 		#region CONST
-		private const string androidGameID = "4945117";
+		private const string editorID = "4945117";
+		private const string androidGameID = "4945118";
+		private string ID;
 		#endregion
 
 		#region FIELDS
@@ -18,7 +20,13 @@ namespace ResumePuzzle.Managers
 
 		public AdsManager()
 		{
-			Advertisement.Initialize(androidGameID, true, this);
+			if (Application.isEditor)
+				ID = editorID;
+			else
+				ID = androidGameID;
+
+			Debug.Log(ID);
+			Advertisement.Initialize(ID, true, this);
 		}
 
 		public void ShowInterstitialAds()
@@ -38,8 +46,6 @@ namespace ResumePuzzle.Managers
 		}
 
 		#endregion
-
-
 	}
 }
 

@@ -12,6 +12,8 @@ EditorBuildSettings:
     path: Assets/ResumePuzzle/Scene/IntroLevel.unity
     guid: 86e89bd9e4a9c5245a015cf17e3c0aae
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: b96e42d077055d04db22cd5dbf862a23,
+      type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,
       guid: ca095505cb6d43d49a2e1235945c6028, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
