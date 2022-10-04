@@ -8,4 +8,3 @@ namespace ResumePuzzle.Interfaces
 		#endregion
 	}
 }
-

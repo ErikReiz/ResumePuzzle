@@ -8,13 +8,13 @@ namespace Zenject
         {
         }
 
-        public ConcreteIdArgConditionCopyNonLazyBinder AsCached()
+        public ConcreteIdArgConditionCopyNonLazyBinder AsSingle()
         {
             BindInfo.Scope = ScopeTypes.Singleton;
             return this;
         }
 
-        public ConcreteIdArgConditionCopyNonLazyBinder AsSingle()
+        public ConcreteIdArgConditionCopyNonLazyBinder AsCached()
         {
             BindInfo.Scope = ScopeTypes.Singleton;
             BindInfo.MarkAsUniqueSingleton = true;

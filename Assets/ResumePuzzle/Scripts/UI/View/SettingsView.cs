@@ -3,9 +3,9 @@ using Zenject;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using ResumePuzzle.Interfaces;
-using System.Collections.Generic;
 using ResumePuzzle.Data;
+using ResumePuzzle.Interfaces;
+using System.Threading.Tasks;
 
 namespace ResumePuzzle.UI.View
 {
@@ -47,17 +47,17 @@ namespace ResumePuzzle.UI.View
 			musicSlider.onValueChanged.RemoveListener(settingsPresenter.ChangeMusicVolume);
 		}
 
-		public async void Show()
+		public Task Show()
 		{
-			await transform.DOLocalMoveX(0, tweeningLength).AsyncWaitForCompletion();
+			return transform.DOLocalMoveX(0, tweeningLength).AsyncWaitForCompletion();
 		}
 	
-		public async void Hide()
+		public Task Hide()
 		{
-			await transform.DOLocalMoveX(-IView.offScreenCoordinates, tweeningLength).AsyncWaitForCompletion();
+			return transform.DOLocalMoveX(-IView.offScreenCoordinates, tweeningLength).AsyncWaitForCompletion();
 		}
 
-		public void SetSettingsView(SettingsPresset settingsPresset)
+		public void SetSettingsView(SettingsSaveData settingsPresset)
 		{
 			resolutionSlider.value = settingsPresset.ResolutionScale;
 			qualityDropdown.value = settingsPresset.QualityPresset;

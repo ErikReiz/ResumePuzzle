@@ -25,13 +25,13 @@ namespace ResumePuzzle.UI.Presenter
 		#region FIELDS
 		[Inject] private ISettingsView settingsView;
 		[Inject] private IMenuPresenter menuPresenter;
-		[Inject] private ISaveSettingsModel saveSettingsModel;
+		[Inject] private ISaveDataModel saveSettingsModel;
 		[Inject] private AudioMixer audioMixer;
 
-		private SettingsPresset settingsPresset;
+		private SettingsSaveData settingsPresset;
 		#endregion
 
-		private void LoadSettings(SettingsPresset? presset)
+		private void LoadSettings(SettingsSaveData? presset)
 		{
 			if (presset != null)
 			{
@@ -58,8 +58,7 @@ namespace ResumePuzzle.UI.Presenter
 			settingsPresset.SoundVolume = GetVolumeOfGroup(soundGroup);
 			settingsPresset.MusicVolume = GetVolumeOfGroup(musicGroup);
 
-			saveSettingsModel.SaveGame(settingsPresset);
-			
+			saveSettingsModel.SaveData(ref settingsPresset);
 		}
 
 		private float GetVolumeOfGroup(string audioGroup)
@@ -79,11 +78,10 @@ namespace ResumePuzzle.UI.Presenter
 			SaveSettings();
 			settingsView.Hide();
 		}
-
 		
 		public void LoadSettings()
 		{
-			LoadSettings(saveSettingsModel.LoadSettings());
+			LoadSettings(saveSettingsModel.LoadData<SettingsSaveData>());
 		}
 
 		public void BackToMenu()

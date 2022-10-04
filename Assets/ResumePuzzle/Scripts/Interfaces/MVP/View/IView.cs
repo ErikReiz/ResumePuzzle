@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace ResumePuzzle.Interfaces
 {
 	public interface IView
@@ -7,8 +9,8 @@ namespace ResumePuzzle.Interfaces
 		#endregion
 
 		#region METHODS
-		void Show();
-		void Hide();
+		Task Show();
+		Task Hide();
 		#endregion
 	}
 }

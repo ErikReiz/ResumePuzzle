@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using ResumePuzzle.Interfaces;
 using ResumePuzzle.Monetization;
+using UnityEngine.Events;
 
 namespace ResumePuzzle.Managers
 {
@@ -25,14 +26,13 @@ namespace ResumePuzzle.Managers
 			else
 				ID = androidGameID;
 
-			Debug.Log(ID);
 			Advertisement.Initialize(ID, true, this);
 		}
 
 		public void ShowInterstitialAds()
 		{
 			interstitialShower.ShowAds();
-		}	
+		}
 		
 		#region INITIALIZATION
 		public void OnInitializationComplete()

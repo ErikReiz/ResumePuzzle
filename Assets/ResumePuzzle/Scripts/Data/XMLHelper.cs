@@ -3,16 +3,6 @@ using System.Xml.Serialization;
 
 namespace ResumePuzzle.Data
 {
-	[System.Serializable]
-	public struct SettingsPresset 
-	{
-		public int QualityPresset;
-
-		public float ResolutionScale;
-		public float SoundVolume;
-		public float MusicVolume;
-	}
-	
 	public static class XMLHelper
 	{
 		public static string Serialize<T>(T objectToSerialieze)

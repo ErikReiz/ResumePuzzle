@@ -1,12 +1,13 @@
 using Zenject;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 using ResumePuzzle.Interfaces;
+using System.Threading.Tasks;
 
 namespace ResumePuzzle.UI.View
 {
-	public class MenuView : MonoBehaviour, IView
+	public class MenuView : MonoBehaviour, IMenuView
 	{
 		#region SERIALIZABLE FIELDS
 		[Header("Button")]
@@ -19,6 +20,7 @@ namespace ResumePuzzle.UI.View
 		#endregion
 
 		#region FIELDS
+		[Inject] private Canvas canvas;
 		[Inject] private IMenuPresenter menuPresenter;
 		#endregion
 
@@ -36,14 +38,24 @@ namespace ResumePuzzle.UI.View
 			quitGameButton.onClick.RemoveListener(menuPresenter.QuitGame);
 		}
 
-		public async void Show()
+		public Task Show()
 		{
-			await transform.DOLocalMoveX(0, tweeningLength).AsyncWaitForCompletion();
+			return transform.DOLocalMoveX(0, tweeningLength).AsyncWaitForCompletion();
 		}
 
-		public async void Hide()
+		public Task Hide()
 		{
-			await transform.DOLocalMoveX(IView.offScreenCoordinates, tweeningLength).AsyncWaitForCompletion();
+			return transform.DOLocalMoveX(IView.offScreenCoordinates, tweeningLength).AsyncWaitForCompletion();
+		}
+
+		public void ShowCanvas()
+		{
+			canvas.gameObject.SetActive(true);
+		}
+
+		public void HideCanvas()
+		{
+			canvas.gameObject.SetActive(false);
 		}
 	}
 }

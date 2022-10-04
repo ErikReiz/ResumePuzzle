@@ -1,3 +1,5 @@
+using UnityEngine.Events;
+
 namespace ResumePuzzle.Interfaces
 {
     public interface IInterstitialAds
@@ -7,4 +9,3 @@ namespace ResumePuzzle.Interfaces
 		#endregion
 	}
 }
-

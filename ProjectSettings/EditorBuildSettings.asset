@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/ResumePuzzle/Scene/MainMenu.unity
-    guid: 0336421a6f680a24fbd1823c7ba2c8fc
-  - enabled: 1
-    path: Assets/ResumePuzzle/Scene/IntroLevel.unity
-    guid: 86e89bd9e4a9c5245a015cf17e3c0aae
+    path: Assets/ResumePuzzle/Scene/StartupScene.unity
+    guid: 728636391be2174459fc4d985622750a
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: b96e42d077055d04db22cd5dbf862a23,
       type: 2}
@@ -18,3 +15,5 @@ EditorBuildSettings:
       guid: ca095505cb6d43d49a2e1235945c6028, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: a36799f6cfc808b49a2282e08250879b, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: cee067554f7e47849b058ac67f39d904,
+      type: 2}

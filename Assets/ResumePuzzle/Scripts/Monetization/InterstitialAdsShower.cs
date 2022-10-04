@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Advertisements;
 
 namespace ResumePuzzle.Monetization
@@ -34,7 +35,10 @@ namespace ResumePuzzle.Monetization
 			throw new System.NotImplementedException();
 		}
 
-		public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState){}
+		public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
+		{
+
+		}
 	}
 }
 
