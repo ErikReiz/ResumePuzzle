@@ -2,6 +2,9 @@ using ResumePuzzle.Interfaces;
 
 namespace ResumePuzzle.UI.Presenter
 {
+	#region FIELDS
+	#endregion
+
 	public class HudPresenter : IHudPresenter
 	{
 		public void Run()

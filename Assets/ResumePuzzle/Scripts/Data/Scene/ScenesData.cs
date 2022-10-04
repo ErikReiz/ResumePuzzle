@@ -11,20 +11,21 @@ namespace ResumePuzzle.Data
 	public class ScenesData : ScriptableObject
 	{
 		#region SERIALIZABLE FIELDS
-		[SerializeField] private SceneAsset mainMenu;
+		[SerializeField] private AssetReference mainMenu;
 	
 		[Tooltip("Put scenes in the right order in which they will be loaded")]
-		[SerializeField] private SceneAsset[] scenes;
+		[SerializeField] private AssetReference[] scenes;
 		#endregion
 
 		#region PROPERTIES
-		public SceneAsset MainMenu { get { return mainMenu; } }
+		public AssetReference MainMenu { get { return mainMenu; } }
 		#endregion
 
-		public SceneAsset GetNextScene(SceneInstance scene)
+		public AssetReference GetNextScene(SceneInstance scene)
 		{
-			Debug.Log(scene.Scene.Equals(mainMenu));
-			if (mainMenu.Equals(scene))
+			string guid = AssetDatabase.GUIDFromAssetPath(scene.Scene.path).ToString();
+
+			if (mainMenu.AssetGUID == guid)
 			{
 				return ContainsIndex(0) ? scenes[0] : null;
 			}
@@ -32,7 +33,7 @@ namespace ResumePuzzle.Data
 			{
 				for(int i = 0; i < scenes.Length; i++)
 				{
-					if(scenes[i].Equals(scene))
+					if(scenes[i].AssetGUID == guid)
 						return ContainsIndex(i + 1) ? scenes[i] : null;
 				}
 

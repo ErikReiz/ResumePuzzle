@@ -43,12 +43,19 @@ namespace ResumePuzzle.UI.Model
 
 		public AsyncOperationHandle LoadNextScene()
 		{
-			var nextScene = scenesData.GetNextScene(previousScene.Result);
-			if (nextScene == null)
-				return default;
+			try
+			{
+				AssetReference nextScene = scenesData.GetNextScene(previousScene.Result);
+				if (nextScene == null)
+					return default;
 
-			var temp = Addressables.LoadSceneAsync(nextScene);
-			return LoadScene(ref temp);
+				var temp = Addressables.LoadSceneAsync(nextScene);
+				return LoadScene(ref temp);
+			}
+			catch
+			{
+				return LoadMainMenu();
+			}
 		}
 
 		public AsyncOperationHandle LoadMainMenu()

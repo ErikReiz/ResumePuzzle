@@ -23,7 +23,7 @@ namespace ResumePuzzle.Containers
 			Container.Bind<AudioMixer>().FromInstance(audioMixer);
 			#endregion
 
-			//Container.Resolve<LoadLevelModel>().LoadMainMenu();
+			Container.Resolve<LoadLevelModel>().LoadMainMenu();
         }
     }
 }
