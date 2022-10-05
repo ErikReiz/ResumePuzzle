@@ -6,7 +6,7 @@ namespace ResumePuzzle.UI.Presenter
 	public class MainMenuPresenter : IMenuPresenter
 	{
 		#region FIELDS
-		[Inject] private IView menuView;
+		[Inject] private IMenuView menuView;
 		[Inject] private ISettingsPresenter settingsPresenter;
 		[Inject] private ILoadScenePresenter loadScenePresenter;
 		#endregion
@@ -24,6 +24,7 @@ namespace ResumePuzzle.UI.Presenter
 		public async void StartGame()
 		{
 			await menuView.Hide();
+			menuView.HideCanvas();
 			loadScenePresenter.LoadNextScene();
 		}
 

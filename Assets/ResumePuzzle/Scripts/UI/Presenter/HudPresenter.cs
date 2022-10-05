@@ -1,3 +1,4 @@
+using Zenject;
 using ResumePuzzle.Interfaces;
 
 namespace ResumePuzzle.UI.Presenter
@@ -7,19 +8,25 @@ namespace ResumePuzzle.UI.Presenter
 
 	public class HudPresenter : IHudPresenter
 	{
-		public void Run()
+		#region FIELDS
+		[Inject] private IView hudView;
+		[Inject] private IMenuPresenter pauseMenuPresenter;
+        #endregion
+
+        public void Run()
 		{
-			throw new System.NotImplementedException();
+			hudView.Show();
 		}
 
 		public void Close()
 		{
-			throw new System.NotImplementedException();
+			hudView.Hide();
 		}
 
 		public void PauseGame()
 		{
-			throw new System.NotImplementedException();
+			hudView.Hide();
+			pauseMenuPresenter.Run();
 		}
 	}
 }

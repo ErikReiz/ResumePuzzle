@@ -31,11 +31,13 @@ namespace ResumePuzzle.UI.View
 
 		public Task Show()
 		{
+			canvas.gameObject.SetActive(true);
 			return null;
 		}
 
 		public Task Hide()
 		{
+			canvas.gameObject.SetActive(false);
 			return null;
 		}
 	}

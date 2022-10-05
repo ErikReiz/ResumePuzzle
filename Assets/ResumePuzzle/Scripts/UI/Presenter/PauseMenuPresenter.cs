@@ -7,11 +7,14 @@ namespace ResumePuzzle.UI.Presenter
 	{
 		#region FIELDS
 		[Inject] private IMenuView menuView;
-		//[Inject] private ISettingsPresenter settingsPresenter;
+		[Inject] private ISettingsPresenter settingsPresenter;
+		[Inject] private IHudPresenter hudPresenter;
+		[Inject] private ILoadScenePresenter loadScenePresenter;
 		#endregion
 
 		public void Run()
 		{
+			UnityEngine.Debug.Log("showed");
 			menuView.ShowCanvas();
 			menuView.Show();
 		}
@@ -24,16 +27,20 @@ namespace ResumePuzzle.UI.Presenter
 		public async void StartGame()
 		{
 			await menuView.Hide();
+			UnityEngine.Debug.Log("closed");
+			menuView.HideCanvas();
+			hudPresenter.Run();
 		}
 
 		public void OpenSettings()
 		{
 			Close();
-			//settingsPresenter.Run();
+			settingsPresenter.Run();
 		}
 
 		public void QuitGame()
 		{
+			//TODO экран загрузки в главное меню
 			Close();
 			menuView.HideCanvas();
 		}

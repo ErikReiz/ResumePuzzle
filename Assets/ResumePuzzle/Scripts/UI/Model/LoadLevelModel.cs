@@ -18,14 +18,16 @@ namespace ResumePuzzle.UI.Model
 
 		private AsyncOperationHandle LoadScene(ref AsyncOperationHandle<SceneInstance> currentScene)
 		{
+			currentScene.Completed += t => UnityEngine.Debug.Log(previousScene.DebugName);
 			currentScene.Completed += UnloadPreviousScene;
+
 			return currentScene;
 		}
 
 		private void UnloadPreviousScene(AsyncOperationHandle<SceneInstance> scene)
 		{
 			if (previousScene.IsValid())
-				Addressables.UnloadSceneAsync(previousScene);
+				Addressables.UnloadSceneAsync(previousScene).Completed += t => UnityEngine.Debug.Log("dfsd");
 
 			previousScene = scene;
 		}

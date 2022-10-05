@@ -18,8 +18,14 @@ namespace ResumePuzzle.Data
 		{
 			XmlSerializer serializer = new(typeof(T));
 			StringReader reader = new(objectToDeserialize);
-
-			return (T)serializer.Deserialize(reader);
+            try
+            {
+				return (T)serializer.Deserialize(reader);
+            }
+			catch
+            {
+				return default;
+            }
 		}
 	}
 }
