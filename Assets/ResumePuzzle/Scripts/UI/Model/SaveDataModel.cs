@@ -1,11 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
 
 namespace ResumePuzzle.UI.Model
 {
-	public class SaveSettingsModel : ISaveDataModel
+	public class SaveDataModel : ISaveDataModel
 	{
 		#region CONST
 		private readonly Dictionary<System.Type, string> dataByTag = new()
@@ -13,6 +13,8 @@ namespace ResumePuzzle.UI.Model
 			[typeof(SettingsSaveData)] = "settings",
 			[typeof(LevelSaveData)] = "level"
 		};
+
+		private readonly Dictionary<System.Type, object> dataTags = new();
 		#endregion
 
 		private string GetPlayerPrefsKey<T>()
@@ -23,7 +25,7 @@ namespace ResumePuzzle.UI.Model
 			return key;
 		}
 
-		public void SaveData<T>(ref T data) where T : struct
+		public void SaveData<T>(T data) where T : struct
 		{
 			string serializedString = XMLHelper.Serialize<T>(data);
 			PlayerPrefs.SetString(GetPlayerPrefsKey<T>(), serializedString);

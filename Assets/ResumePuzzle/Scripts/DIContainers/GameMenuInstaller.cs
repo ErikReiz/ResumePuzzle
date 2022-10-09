@@ -12,10 +12,12 @@ namespace ResumePuzzle.Containers
 		[Header("Canvas")]
 		[SerializeField] private Canvas hudCanvas;
 		[SerializeField] private Canvas pauseCanvas;
+		[SerializeField] private Canvas loadingScreenCanvas;
 
 		[Header("View")]
 		[SerializeField] private MenuView menuView;
 		[SerializeField] private HudView hudView;
+		[SerializeField] private LoadingScreenView loadingScreenView;
 		#endregion
 
 		public override void InstallBindings()
@@ -23,16 +25,21 @@ namespace ResumePuzzle.Containers
 			#region PRESENTER
 			Container.Bind<IMenuPresenter>().To<PauseMenuPresenter>().AsSingle().NonLazy();
 			Container.Bind<IHudPresenter>().To<HudPresenter>().AsSingle().NonLazy();
+			Container.Bind<ILoadScenePresenter>().To<LoadScenePresenter>().AsSingle().NonLazy();
 			#endregion
 
 			#region VIEW
-			Container.Bind<Canvas>().FromInstance(hudCanvas).AsSingle()
-				.WhenInjectedInto(typeof(HudView));
-			Container.Bind<Canvas>().FromInstance(pauseCanvas).AsSingle()
-				.WhenInjectedInto(typeof(MenuView));
-
 			Container.Bind<IMenuView>().FromInstance(menuView).AsSingle();
 			Container.Bind<IView>().FromInstance(hudView).AsSingle();
+			Container.Bind<ILoadingScreenView>()
+				.FromInstance(loadingScreenView).AsSingle();
+
+			Container.Bind<Canvas>().FromInstance(hudCanvas)
+				.AsSingle().WhenInjectedInto(typeof(HudView));
+			Container.Bind<Canvas>().FromInstance(pauseCanvas)
+				.AsSingle().WhenInjectedInto(typeof(MenuView));
+			Container.Bind<Canvas>().FromInstance(loadingScreenCanvas)
+				.AsSingle().WhenInjectedInto(typeof(LoadingScreenView));
 			#endregion
 		}
 	}

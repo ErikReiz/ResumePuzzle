@@ -1,5 +1,4 @@
 using Zenject;
-using ResumePuzzle.UI.Model;
 using ResumePuzzle.Interfaces;
 using System.Threading.Tasks;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -10,8 +9,8 @@ namespace ResumePuzzle.UI.Presenter
 	{
 		#region FIELDS
 		[Inject] private ILoadingScreenView loadingScreenView;
-		[Inject] private LoadLevelModel loadLevelModel;
 		[Inject] private IInterstitialAds ads;
+		[Inject] private ILoadLevelModel loadLevelModel;
 		#endregion
 
 		private async Task WhenLoading(AsyncOperationHandle operationHandle)
@@ -45,7 +44,7 @@ namespace ResumePuzzle.UI.Presenter
 			await loadingScreenView.Show();
 
 			AsyncOperationHandle operationHandle = loadLevelModel.LoadNextScene();
-			await UpdateLoadingBar(operationHandle);
+			await WhenLoading(operationHandle);
 		}
 
 		public async void LoadMainMenu()
@@ -53,7 +52,7 @@ namespace ResumePuzzle.UI.Presenter
 			await loadingScreenView.Show();
 
 			AsyncOperationHandle operationHandle = loadLevelModel.LoadMainMenu();
-			await UpdateLoadingBar(operationHandle);
+			await WhenLoading(operationHandle);
 		}
 	}
 

@@ -7,49 +7,42 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 
 namespace ResumePuzzle.UI.Model
 {
-    public class LoadLevelModel
+    public class LoadLevelModel : ILoadLevelModel
     {
 		#region FIELDS
 		[Inject] private ISaveDataModel saveDataModel;
 		[Inject] private ScenesData scenesData;
 
-		private AsyncOperationHandle<SceneInstance> previousScene;
+		private SceneInstance previousScene;
 		#endregion
 
 		private AsyncOperationHandle LoadScene(ref AsyncOperationHandle<SceneInstance> currentScene)
 		{
-			currentScene.Completed += t => UnityEngine.Debug.Log(previousScene.DebugName);
-			currentScene.Completed += UnloadPreviousScene;
+			currentScene.Completed += res => previousScene = res.Result;
 
 			return currentScene;
 		}
 
-		private void UnloadPreviousScene(AsyncOperationHandle<SceneInstance> scene)
-		{
-			if (previousScene.IsValid())
-				Addressables.UnloadSceneAsync(previousScene).Completed += t => UnityEngine.Debug.Log("dfsd");
-
-			previousScene = scene;
-		}
-
 		public AsyncOperationHandle LoadLastScene()
 		{
-			LevelSaveData saveData = saveDataModel.LoadData<LevelSaveData>();
+			try
+			{
+				LevelSaveData saveData = saveDataModel.LoadData<LevelSaveData>();
+				var temp = Addressables.LoadSceneAsync(saveData.LevelName);
 
-			if (saveData.LevelID == null)
+				return LoadScene(ref temp);
+			}
+			catch
+			{
 				return LoadNextScene();
-
-			var temp = Addressables.LoadSceneAsync(saveData.LevelID);
-			return LoadScene(ref temp);
+			}
 		}
 
 		public AsyncOperationHandle LoadNextScene()
 		{
 			try
 			{
-				AssetReference nextScene = scenesData.GetNextScene(previousScene.Result);
-				if (nextScene == null)
-					return default;
+				AssetReference nextScene = scenesData.GetNextScene(previousScene);
 
 				var temp = Addressables.LoadSceneAsync(nextScene);
 				return LoadScene(ref temp);
@@ -65,6 +58,5 @@ namespace ResumePuzzle.UI.Model
 			var temp = Addressables.LoadSceneAsync(scenesData.MainMenu);
 			return LoadScene(ref temp);
 		}
-
 	}
 }

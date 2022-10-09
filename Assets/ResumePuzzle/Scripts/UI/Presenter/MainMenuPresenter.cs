@@ -25,7 +25,8 @@ namespace ResumePuzzle.UI.Presenter
 		{
 			await menuView.Hide();
 			menuView.HideCanvas();
-			loadScenePresenter.LoadNextScene();
+
+			loadScenePresenter.LoadLastScene();
 		}
 
 		public void OpenSettings()

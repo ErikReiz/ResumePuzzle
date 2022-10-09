@@ -1,4 +1,7 @@
+using System;
 using Zenject;
+using UnityEngine.SceneManagement;
+using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
 
 namespace ResumePuzzle.UI.Presenter
@@ -10,11 +13,27 @@ namespace ResumePuzzle.UI.Presenter
 		[Inject] private ISettingsPresenter settingsPresenter;
 		[Inject] private IHudPresenter hudPresenter;
 		[Inject] private ILoadScenePresenter loadScenePresenter;
+		[Inject] private ISaveDataModel saveDataModel;
 		#endregion
+
+		private async void CloseAsync(Action afterCloseFunc)
+		{
+			await menuView.Hide();
+			menuView.HideCanvas();
+
+			afterCloseFunc();
+		}
+
+		private LevelSaveData SetSceneState()
+		{
+			LevelSaveData levelSaveData = new();
+			levelSaveData.LevelName = SceneManager.GetActiveScene().name;
+
+			return levelSaveData;
+		}
 
 		public void Run()
 		{
-			UnityEngine.Debug.Log("showed");
 			menuView.ShowCanvas();
 			menuView.Show();
 		}
@@ -26,23 +45,20 @@ namespace ResumePuzzle.UI.Presenter
 
 		public async void StartGame()
 		{
-			await menuView.Hide();
-			UnityEngine.Debug.Log("closed");
-			menuView.HideCanvas();
-			hudPresenter.Run();
+			CloseAsync(hudPresenter.Run);
 		}
 
 		public void OpenSettings()
 		{
 			Close();
+
 			settingsPresenter.Run();
 		}
 
-		public void QuitGame()
+		public async void QuitGame()
 		{
-			//TODO экран загрузки в главное меню
-			Close();
-			menuView.HideCanvas();
+			saveDataModel.SaveData<LevelSaveData>(SetSceneState());
+			CloseAsync(loadScenePresenter.LoadMainMenu);
 		}
 	}
 }

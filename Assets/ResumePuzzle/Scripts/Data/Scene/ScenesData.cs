@@ -1,9 +1,6 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
-using UnityEngine.SceneManagement;
 
 namespace ResumePuzzle.Data
 {
@@ -23,9 +20,9 @@ namespace ResumePuzzle.Data
 
 		public AssetReference GetNextScene(SceneInstance scene)
 		{
-			string guid = AssetDatabase.GUIDFromAssetPath(scene.Scene.path).ToString();
+			string sceneName = scene.Scene.name;
 
-			if (mainMenu.AssetGUID == guid)
+			if (sceneName == mainMenu.editorAsset.name)
 			{
 				return ContainsIndex(0) ? scenes[0] : null;
 			}
@@ -33,7 +30,7 @@ namespace ResumePuzzle.Data
 			{
 				for(int i = 0; i < scenes.Length; i++)
 				{
-					if(scenes[i].AssetGUID == guid)
+					if(scenes[i].editorAsset.name == sceneName)
 						return ContainsIndex(i + 1) ? scenes[i] : null;
 				}
 

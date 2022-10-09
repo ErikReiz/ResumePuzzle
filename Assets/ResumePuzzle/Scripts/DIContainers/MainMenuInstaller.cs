@@ -12,23 +12,28 @@ namespace ResumePuzzle.Containers
         [SerializeField] private MenuView menuView;
 		[SerializeField] private LoadingScreenView loadingScreenView;
 
-        [SerializeField] private Canvas canvas;
+        [SerializeField] private Canvas mainCanvas;
+        [SerializeField] private Canvas loadingScreenCanvas;
         #endregion
 
-	    public override void InstallBindings()
+        public override void InstallBindings()
         {
             Application.targetFrameRate = 60; //TODO убрать
 
 			#region VIEW
-			Container.Bind<IView>().FromInstance(menuView)
+			Container.Bind<IMenuView>().FromInstance(menuView)
                 .AsSingle().WhenInjectedInto<MainMenuPresenter>();
-            Container.Bind<ILoadingScreenView>().FromInstance(loadingScreenView).AsSingle();
+            Container.Bind<ILoadingScreenView>()
+                .FromInstance(loadingScreenView).AsSingle();
 
-            Container.Bind<Canvas>().FromInstance(canvas).AsSingle();
-			#endregion
+            Container.Bind<Canvas>().FromInstance(mainCanvas)
+                .AsSingle().WhenInjectedInto(typeof(MenuView));
+            Container.Bind<Canvas>().FromInstance(loadingScreenCanvas)
+                .AsSingle().WhenInjectedInto(typeof(LoadingScreenView));
+            #endregion
 
-			#region PRESENTER
-			Container.Bind<IMenuPresenter>().To<MainMenuPresenter>().AsSingle().NonLazy();
+            #region PRESENTER
+            Container.Bind<IMenuPresenter>().To<MainMenuPresenter>().AsSingle().NonLazy();
             Container.Bind<ILoadScenePresenter>().To<LoadScenePresenter>().AsSingle().NonLazy();
 			#endregion
 

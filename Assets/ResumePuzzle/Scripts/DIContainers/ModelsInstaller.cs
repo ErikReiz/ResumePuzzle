@@ -15,15 +15,13 @@ namespace ResumePuzzle.Containers
 		public override void InstallBindings()
         {
 			#region MODELDS
-			Container.Bind<ISaveDataModel>().To<SaveSettingsModel>().AsCached().NonLazy();
-            Container.Bind<LoadLevelModel>().ToSelf().AsCached().NonLazy();
+			Container.Bind<ISaveDataModel>().To<SaveDataModel>().AsCached().NonLazy();
+            Container.Bind<ILoadLevelModel>().To<LoadLevelModel>().AsCached().NonLazy();
 			#endregion
 
 			#region OTHER
 			Container.Bind<AudioMixer>().FromInstance(audioMixer);
 			#endregion
-
-			Container.Resolve<LoadLevelModel>().LoadMainMenu();
         }
     }
 }

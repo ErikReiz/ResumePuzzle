@@ -9,17 +9,13 @@ namespace ResumePuzzle.UI.Presenter
 {
 	public class SettingsMenuPresenter : ISettingsPresenter
 	{
-		#region STRUCT
-		struct ResolutionTaskOutput
-		{
-			public List<string> resolutionsString;
-			public int currentResolutionIndex;
-		}
-		#endregion
-
 		#region CONST
 		private const string soundGroup = "Sound";
 		private const string musicGroup = "Music";
+		#endregion
+
+		#region STATIC FILEDS
+		static private SettingsSaveData settingsPresset;
 		#endregion
 
 		#region FIELDS
@@ -27,8 +23,6 @@ namespace ResumePuzzle.UI.Presenter
 		[Inject] private IMenuPresenter menuPresenter;
 		[Inject] private ISaveDataModel saveSettingsModel;
 		[Inject] private AudioMixer audioMixer;
-
-		private SettingsSaveData settingsPresset;
 		#endregion
 
 		private void LoadSettings(SettingsSaveData? presset)
@@ -58,7 +52,7 @@ namespace ResumePuzzle.UI.Presenter
 			settingsPresset.SoundVolume = GetVolumeOfGroup(soundGroup);
 			settingsPresset.MusicVolume = GetVolumeOfGroup(musicGroup);
 
-			saveSettingsModel.SaveData(ref settingsPresset);
+			saveSettingsModel.SaveData(settingsPresset);
 		}
 
 		private float GetVolumeOfGroup(string audioGroup)
@@ -70,6 +64,7 @@ namespace ResumePuzzle.UI.Presenter
 
 		public void Run()
 		{
+			LoadSettings(settingsPresset);
 			settingsView.Show();
 		}
 
