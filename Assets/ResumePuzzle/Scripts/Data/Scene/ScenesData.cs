@@ -21,8 +21,8 @@ namespace ResumePuzzle.Data
 		public AssetReference GetNextScene(SceneInstance scene)
 		{
 			string sceneName = scene.Scene.name;
-
-			if (sceneName == mainMenu.editorAsset.name)
+			
+			if (AddressablesUtility.GetAddressFromAssetReference(mainMenu) == sceneName)
 			{
 				return ContainsIndex(0) ? scenes[0] : null;
 			}
@@ -30,11 +30,11 @@ namespace ResumePuzzle.Data
 			{
 				for(int i = 0; i < scenes.Length; i++)
 				{
-					if(scenes[i].editorAsset.name == sceneName)
+					if(AddressablesUtility.GetAddressFromAssetReference(scenes[i]) == sceneName)
 						return ContainsIndex(i + 1) ? scenes[i] : null;
 				}
 
-				return null;
+				return mainMenu;
 			}
 		}
 

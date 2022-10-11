@@ -18,8 +18,6 @@ namespace ResumePuzzle.Containers
 
         public override void InstallBindings()
         {
-            Application.targetFrameRate = 60; //TODO убрать
-
 			#region VIEW
 			Container.Bind<IMenuView>().FromInstance(menuView)
                 .AsSingle().WhenInjectedInto<MainMenuPresenter>();

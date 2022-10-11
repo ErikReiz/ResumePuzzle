@@ -1,7 +1,7 @@
 using UnityEngine;
 using ResumePuzzle.Interfaces;
 using UnityEngine.InputSystem;
-
+using UnityEngine.AddressableAssets;
 namespace ResumePuzzle.Player
 {
 	public class PlayerAnimatorController : MonoBehaviour, IPlayerAnimatorController 

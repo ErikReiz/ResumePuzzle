@@ -12,7 +12,7 @@ namespace ResumePuzzle.Player
 
 		#region FIELDS
 		private IPlayerAnimatorController animatorController;
-		private Rigidbody2D rigidbody;
+		private Rigidbody2D playerRigidbody;
 
 		private Vector2 direction;
 		#endregion
@@ -20,12 +20,12 @@ namespace ResumePuzzle.Player
 		private void Awake()
 		{
 			animatorController = GetComponent<IPlayerAnimatorController>();
-			rigidbody = GetComponent<Rigidbody2D>();
+			playerRigidbody = GetComponent<Rigidbody2D>();
 		}
 
 		private void Update()
 		{
-			rigidbody.velocity = direction * movementSpeed;			
+			playerRigidbody.velocity = direction * movementSpeed;			
 		}
 
 		public void OnMove(InputAction.CallbackContext context)

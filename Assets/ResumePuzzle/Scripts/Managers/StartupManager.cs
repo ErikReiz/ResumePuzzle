@@ -12,6 +12,7 @@ namespace ResumePuzzle.Managers
 
 		private void Awake()
 		{
+			Application.targetFrameRate = 60;
 			loadLevelModel.LoadMainMenu();
 		}
 	}

@@ -21,12 +21,17 @@ MonoBehaviour:
     m_Address: IntroLevel
     m_ReadOnly: 0
     m_SerializedLabels:
-    - default
+    - Scene
   - m_GUID: 0336421a6f680a24fbd1823c7ba2c8fc
     m_Address: MainMenu
     m_ReadOnly: 0
     m_SerializedLabels:
-    - default
+    - Scene
+  - m_GUID: a5c7961e77e30a7439349245d6210720
+    m_Address: LoadingScreen
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 272209fd5414be04cb25a49b0b18696e, type: 2}
   m_SchemaSet:
