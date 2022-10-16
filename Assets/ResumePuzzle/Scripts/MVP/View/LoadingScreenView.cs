@@ -12,6 +12,8 @@ namespace ResumePuzzle.UI.View
 	public class LoadingScreenView : MonoBehaviour, ILoadingScreenView
 	{
 		#region SERIALIZABLE FIELDS
+		[SerializeField] private Transform loadingScreen;
+		[SerializeField] private Canvas canvas;
 		[SerializeField] private Slider loadingSlider;
 		[SerializeField] private TMP_Text loadingText;
 
@@ -20,7 +22,6 @@ namespace ResumePuzzle.UI.View
 		#endregion
 
 		#region FIELDS
-		[Inject] private Canvas canvas;
 		[Inject] private ILoadScenePresenter loadScenePresenter;
 		#endregion
 
@@ -33,7 +34,7 @@ namespace ResumePuzzle.UI.View
 		public Task Show()
 		{
 			canvas.gameObject.SetActive(true);
-			Task showTask = transform.DOScale(new Vector3(1, 1), tweeningLength).AsyncWaitForCompletion();
+			Task showTask = loadingScreen.DOScale(new Vector3(1, 1), tweeningLength).AsyncWaitForCompletion();
 			showTask.ContinueWith(obj => StartCoroutine(UpdateLoadingBar()));
 
 			return showTask;
@@ -42,7 +43,7 @@ namespace ResumePuzzle.UI.View
 		public Task Hide()
 		{
 			canvas.gameObject.SetActive(false);
-			return transform.DOScale(Vector3.zero, tweeningLength).AsyncWaitForCompletion();
+			return loadingScreen.DOScale(Vector3.zero, tweeningLength).AsyncWaitForCompletion();
 		}
 
 		public IEnumerator UpdateLoadingBar()

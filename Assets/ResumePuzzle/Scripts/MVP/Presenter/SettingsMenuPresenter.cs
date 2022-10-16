@@ -1,16 +1,16 @@
-using Zenject;
-using UnityEngine;
-using UnityEngine.Audio;
 using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
+using UnityEngine;
+using UnityEngine.Audio;
+using Zenject;
 
 namespace ResumePuzzle.UI.Presenter
 {
 	public class SettingsMenuPresenter : ISettingsPresenter
 	{
 		#region CONST
-		private const string soundGroup = "Sound";
-		private const string musicGroup = "Music";
+		private readonly string soundGroup = "Sound";
+		private readonly string musicGroup = "Music";
 		#endregion
 
 		#region STATIC FILEDS
@@ -24,23 +24,18 @@ namespace ResumePuzzle.UI.Presenter
 		[Inject] private AudioMixer audioMixer;
 		#endregion
 
-		private void LoadSettings(SettingsSaveData? presset)
+		private void LoadSettings()
 		{
-			if (presset != null)
-			{
-				settingsPresset = presset.Value;
+			if (!settingsPresset.IsValid)
+				settingsPresset = saveSettingsModel.LoadData<SettingsSaveData>();
 
-				QualitySettings.SetQualityLevel(settingsPresset.QualityPresset);
-				QualitySettings.resolutionScalingFixedDPIFactor = settingsPresset.ResolutionScale;
-				audioMixer.SetFloat(soundGroup, settingsPresset.SoundVolume);
-				audioMixer.SetFloat(musicGroup, settingsPresset.MusicVolume);
+			QualitySettings.SetQualityLevel(settingsPresset.QualityPresset);
+			QualitySettings.resolutionScalingFixedDPIFactor = settingsPresset.ResolutionScale;
+			audioMixer.SetFloat(soundGroup, settingsPresset.SoundVolume);
+			audioMixer.SetFloat(musicGroup, settingsPresset.MusicVolume);
 
-				settingsView.SetSettingsView(settingsPresset);
-			}
-			else
-			{
-				settingsPresset = new();
-			}
+			settingsPresset.IsValid = true;
+			settingsView.SetSettingsView(settingsPresset);
 		}
 
 		private void SaveSettings()
@@ -63,7 +58,7 @@ namespace ResumePuzzle.UI.Presenter
 
 		public void Run()
 		{
-			LoadSettings(settingsPresset);
+			LoadSettings();
 			settingsView.Show();
 		}
 
@@ -71,11 +66,6 @@ namespace ResumePuzzle.UI.Presenter
 		{
 			SaveSettings();
 			settingsView.Hide();
-		}
-		
-		public void LoadSettings()
-		{
-			LoadSettings(saveSettingsModel.LoadData<SettingsSaveData>());
 		}
 
 		public void BackToMenu()

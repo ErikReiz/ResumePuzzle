@@ -12,6 +12,7 @@ namespace ResumePuzzle.UI.View
 		#region SERIALIZABLE FIELDS
 		[Header("Button")]
 		[SerializeField] private Button pauseButton;
+		[SerializeField] private Button interactButton;
 		#endregion
 
 		#region FIELDS
@@ -22,11 +23,13 @@ namespace ResumePuzzle.UI.View
 		private void OnEnable()
 		{
 			pauseButton.onClick.AddListener(hudPresenter.PauseGame);
+			interactButton.onClick.AddListener(hudPresenter.Interact);
 		}
 
 		private void OnDisable()
 		{
 			pauseButton.onClick.RemoveListener(hudPresenter.PauseGame);
+			interactButton.onClick.RemoveListener(hudPresenter.Interact);
 		}
 
 		public Task Show()

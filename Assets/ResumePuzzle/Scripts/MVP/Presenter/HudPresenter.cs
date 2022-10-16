@@ -11,6 +11,7 @@ namespace ResumePuzzle.UI.Presenter
 		#region FIELDS
 		[Inject] private IView hudView;
 		[Inject] private IMenuPresenter pauseMenuPresenter;
+		[Inject] private IPlayer player;
         #endregion
 
         public void Run()
@@ -27,6 +28,11 @@ namespace ResumePuzzle.UI.Presenter
 		{
 			hudView.Hide();
 			pauseMenuPresenter.Run();
+		}
+
+		public void Interact()
+		{
+			player.OnInteract();
 		}
 	}
 }

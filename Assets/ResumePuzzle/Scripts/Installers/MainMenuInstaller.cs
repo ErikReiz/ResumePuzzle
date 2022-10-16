@@ -32,7 +32,6 @@ namespace ResumePuzzle.Containers
 
             #region PRESENTER
             Container.Bind<IMenuPresenter>().To<MainMenuPresenter>().AsSingle().NonLazy();
-            Container.Bind<ILoadScenePresenter>().To<LoadScenePresenter>().AsSingle().NonLazy();
 			#endregion
 
             RunFuncAfterBindings();
@@ -41,7 +40,6 @@ namespace ResumePuzzle.Containers
         private void RunFuncAfterBindings()
 		{
             Container.Resolve<IMenuPresenter>().Run();
-            Container.Resolve<ISettingsPresenter>().LoadSettings();
         }
     }
 }

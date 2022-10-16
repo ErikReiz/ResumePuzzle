@@ -12,8 +12,8 @@ namespace ResumePuzzle.UI.Presenter
 		[Inject] private IMenuView menuView;
 		[Inject] private ISettingsPresenter settingsPresenter;
 		[Inject] private IHudPresenter hudPresenter;
-		[Inject] private ILoadScenePresenter loadScenePresenter;
 		[Inject] private ISaveDataModel saveDataModel;
+		[Inject] private ILoadScenePresenter loadScenePresenter;
 		#endregion
 
 		private async void CloseAsync(Action afterCloseFunc)

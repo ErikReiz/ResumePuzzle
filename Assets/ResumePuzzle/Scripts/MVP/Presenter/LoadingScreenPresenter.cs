@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResumePuzzle.UI.Presenter
 {
-	public class LoadScenePresenter : ILoadScenePresenter
+	public class LoadingScreenPresenter : ILoadScenePresenter
 	{
 		#region FIELDS
 		[Inject] private LoadingScreenFactory loadingScreenFactory;
@@ -23,30 +23,34 @@ namespace ResumePuzzle.UI.Presenter
 			await loadingScreenView.Show();
 		}
 
-		private void WhileLoading()
+		private void AfterrLoading()
 		{
-			loadingOperation.Completed += t => adsManager.ShowInterstitialAds();
+			loadingOperation.Completed += handler =>
+			{
+				adsManager.ShowInterstitialAds();
+				loadingScreenFactory.Unload();
+			};
 		}
 
 		public async void LoadLastScene()
 		{
 			await BeforeLoading();
 			loadingOperation = loadLevelModel.LoadLastScene();
-			WhileLoading();
+			AfterrLoading();
 		}
 
 		public async void LoadNextScene()
 		{
 			await BeforeLoading();
 			loadingOperation = loadLevelModel.LoadNextScene();
-			WhileLoading();
+			AfterrLoading();
 		}
 
 		public async void LoadMainMenu()
 		{
 			await BeforeLoading();
 			loadingOperation = loadLevelModel.LoadMainMenu();
-			WhileLoading();
+			AfterrLoading();
 		}
 	}
 

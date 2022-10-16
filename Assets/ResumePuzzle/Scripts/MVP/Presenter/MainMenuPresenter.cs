@@ -1,6 +1,5 @@
 using Zenject;
 using ResumePuzzle.Interfaces;
-using UnityEngine.SceneManagement;
 
 namespace ResumePuzzle.UI.Presenter
 {

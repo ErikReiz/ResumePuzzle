@@ -1,3 +1,4 @@
+using Zenject;
 using UnityEngine;
 using System.Collections.Generic;
 using ResumePuzzle.Data;
@@ -17,6 +18,10 @@ namespace ResumePuzzle.UI.Model
 		private readonly Dictionary<System.Type, object> dataTags = new();
 		#endregion
 
+		#region FIELDS
+		[Inject] private ISerializationHelper serializationHelper;
+		#endregion
+
 		private string GetPlayerPrefsKey<T>()
 		{
 			if (!dataByTag.TryGetValue(typeof(T), out string key))
@@ -27,7 +32,7 @@ namespace ResumePuzzle.UI.Model
 
 		public void SaveData<T>(T data) where T : struct
 		{
-			string serializedString = XMLHelper.Serialize<T>(data);
+			string serializedString = serializationHelper.Serialize<T>(data);
 			PlayerPrefs.SetString(GetPlayerPrefsKey<T>(), serializedString);
 			PlayerPrefs.Save();
 		}
@@ -38,7 +43,7 @@ namespace ResumePuzzle.UI.Model
 
 			if (PlayerPrefs.HasKey(key))
 			{
-				return XMLHelper.Deserealize<T>(PlayerPrefs.GetString(key));
+				return serializationHelper.Deserealize<T>(PlayerPrefs.GetString(key));
 			}
 			else
 			{

@@ -13,6 +13,6 @@ public class SettingsInstaller : MonoInstaller
 	public override void InstallBindings()
     {
         Container.Bind<ISettingsView>().FromInstance(settingsView).AsSingle();
-        Container.Bind<ISettingsPresenter>().To<SettingsMenuPresenter>().AsSingle().NonLazy();
+        Container.Bind<ISettingsPresenter>().To<SettingsMenuPresenter>().AsSingle();
     }
 }
