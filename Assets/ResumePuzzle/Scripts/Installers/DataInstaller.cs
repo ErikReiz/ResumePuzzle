@@ -1,8 +1,7 @@
 using Zenject;
 using ResumePuzzle.Data;
-using ResumePuzzle.Factory;
+using ResumePuzzle.Model;
 using ResumePuzzle.Interfaces;
-using ResumePuzzle.UI.Model;
 
 namespace ResumePuzzle.Containers
 {
@@ -12,9 +11,6 @@ namespace ResumePuzzle.Containers
         {
             Container.Bind<ISerializationHelper>().To<XMLHelper>()
                 .AsSingle().WhenInjectedInto(typeof(SaveDataModel)).NonLazy();
-
-            Container.Bind<IAddresableLoaderModel>().To<LocalAddresableLoaderModel>()
-                .AsSingle().WhenInjectedInto(typeof(LoadingScreenFactory)).NonLazy();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace ResumePuzzle.Player
 
 		private void Update()
 		{
-			playerRigidbody.velocity = direction * movementSpeed * Time.deltaTime;	
+			playerRigidbody.velocity = direction * movementSpeed;	
 		}
 
 		public void OnMove(InputAction.CallbackContext context)
@@ -43,7 +43,6 @@ namespace ResumePuzzle.Player
 
 		public void OnInteract()
 		{
-			
 			interactionSystem.Interact(transform.position);
 		}
 	}

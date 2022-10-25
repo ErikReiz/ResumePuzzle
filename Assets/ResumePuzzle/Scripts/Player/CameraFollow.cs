@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cainos.PixelArtTopDown_Basic
+namespace ResumePuzzle.Player
 {
-    //let camera follow target
     public class CameraFollow : MonoBehaviour
     {
         public Transform target;

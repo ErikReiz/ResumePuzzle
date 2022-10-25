@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 
-namespace ResumePuzzle.UI.Model
+namespace ResumePuzzle.Model
 {
     public class LoadLevelModel : ILoadLevelModel
     {
@@ -19,7 +19,6 @@ namespace ResumePuzzle.UI.Model
 		private AsyncOperationHandle LoadScene(ref AsyncOperationHandle<SceneInstance> currentScene)
 		{
 			currentScene.Completed += res => previousScene = res.Result;
-
 			return currentScene;
 		}
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
 
-namespace ResumePuzzle.UI.Model
+namespace ResumePuzzle.Model
 {
 	public class SaveDataModel : ISaveDataModel
 	{

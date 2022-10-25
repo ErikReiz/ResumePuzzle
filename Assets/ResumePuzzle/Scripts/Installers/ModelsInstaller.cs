@@ -1,7 +1,8 @@
 using Zenject;
 using UnityEngine;
 using UnityEngine.Audio;
-using ResumePuzzle.UI.Model;
+using ResumePuzzle.Model;
+using ResumePuzzle.Factory;
 using ResumePuzzle.Interfaces;
 
 namespace ResumePuzzle.Containers
@@ -15,12 +16,14 @@ namespace ResumePuzzle.Containers
 		public override void InstallBindings()
         {
 			#region MODELDS
-			Container.Bind<ISaveDataModel>().To<SaveDataModel>().AsCached().NonLazy();
-            Container.Bind<ILoadLevelModel>().To<LoadLevelModel>().AsCached().NonLazy();
-			#endregion
+			Container.Bind<ISaveDataModel>().To<SaveDataModel>().AsSingle().NonLazy();
+            Container.Bind<ILoadLevelModel>().To<LoadLevelModel>().AsSingle().NonLazy();
+            Container.Bind<IAddresableLoaderModel>().To<LocalAddresableLoaderModel>()
+                .AsSingle().WhenInjectedInto(typeof(LoadingScreenFactory)).NonLazy();
+            #endregion
 
-			#region OTHER
-			Container.Bind<AudioMixer>().FromInstance(audioMixer);
+            #region OTHER
+            Container.Bind<AudioMixer>().FromInstance(audioMixer);
 			#endregion
         }
     }

@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 75c0b8b11e3e1f74cb6daf9e5ea857a3
   m_SerializeEntries:
-  - m_GUID: 86e89bd9e4a9c5245a015cf17e3c0aae
-    m_Address: IntroLevel
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Scene
   - m_GUID: 0336421a6f680a24fbd1823c7ba2c8fc
     m_Address: MainMenu
     m_ReadOnly: 0
@@ -29,6 +24,50 @@ MonoBehaviour:
     - Scene
   - m_GUID: a5c7961e77e30a7439349245d6210720
     m_Address: LoadingScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 86e89bd9e4a9c5245a015cf17e3c0aae
+    m_Address: IntroLevel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c3a40e1c46727b94e959990527f8e7fa
+    m_Address: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Texture/TX Plant.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ec47f75fe8aff1644ac73998f4ad31b5
+    m_Address: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Texture/TX Player.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 29c9cded5e558164aaf8c9bf08aa1510
+    m_Address: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Texture/TX Props.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8501e10b1eafde34586080ba342fdc0e
+    m_Address: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Texture/TX Shadow
+      Plant.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ed7554aeefd5da44a9fe1ee9b93afe77
+    m_Address: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Texture/TX Shadow.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dda6bbdb704d84847b38f9eced72bf59
+    m_Address: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Texture/TX Struct.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1c9ed9d1200c29d4cbfd2071028c1cd5
+    m_Address: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Texture/TX Tileset
+      Grass.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a07735877a3bd644094331b137b71878
+    m_Address: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Texture/TX Tileset
+      Stone Ground.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9f8f114589864b6489859a58fbb6baf9
+    m_Address: Assets/ResumePuzzle/Art/Pixel Art Top Down - Basic/Texture/TX Tileset
+      Wall.png
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

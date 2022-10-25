@@ -1,25 +1,40 @@
+using Zenject;
 using UnityEngine;
+using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
+using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
 
 namespace ResumePuzzle.Managers
 {
 	public class AudioManager : MonoBehaviour, ISoundManager, IMusicManager
 	{
-		#region PROPERTIES
-		public float SoundVolume { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public float MusicVolume { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-		public bool SoundEnabled { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public bool MusicEnabled { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public bool IsMusicPlaying { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		#region FIELDS
+		[Inject] private MusicData musicData;
 		#endregion
 
-		public void PlayMusic(AudioClip audio, float volume)
+		private void OnEnable()
 		{
-			throw new System.NotImplementedException();
+			SceneManager.sceneLoaded += GetMusicByScene;
 		}
 
-		public void PlaySound(AudioClip audio, float volume)
+		private void OnDisable()
+		{
+			SceneManager.sceneLoaded -= GetMusicByScene;
+		}
+
+		private async void GetMusicByScene(Scene scene, LoadSceneMode loadMode)
+		{
+			AudioClip musicClip = musicData.GetMusicByScene(scene);
+			PlayMusic(musicClip);
+		}
+
+		public void PlayMusic(AudioClip audio)
+		{
+			Debug.Log(audio.name);
+		}
+
+		public void PlaySound(AudioClip audio)
 		{
 			throw new System.NotImplementedException();
 		}

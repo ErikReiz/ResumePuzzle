@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 using System.Threading.Tasks;
 using ResumePuzzle.Interfaces;
 
-namespace ResumePuzzle.Data
+namespace ResumePuzzle.Model
 {
 	public class LocalAddresableLoaderModel : IAddresableLoaderModel
 	{
@@ -11,7 +11,7 @@ namespace ResumePuzzle.Data
 		private GameObject loadedObject;
 		#endregion
 
-		public async Task<T> LoadAsset<T>(string assetID)
+		public async Task<T> LoadAsset<T>(object assetID)
 		{
 			Task<GameObject> task = Addressables.InstantiateAsync(assetID).Task;
 			loadedObject = await task;
