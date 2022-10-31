@@ -18,7 +18,7 @@ namespace ResumePuzzle.Monetization
 		
 		public void OnUnityAdsAdLoaded(string placementId){}
 
-		public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message) //TODO Analytics
+		public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
 		{
 			Debug.Log($"Load failed {error} {message}");
 		}

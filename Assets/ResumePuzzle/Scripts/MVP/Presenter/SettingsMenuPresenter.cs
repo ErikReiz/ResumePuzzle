@@ -88,12 +88,12 @@ namespace ResumePuzzle.UI.Presenter
 
 		public void ChangeSoundVolume(float volume)
 		{
-			audioMixer.SetFloat(soundGroup, volume);
+			audioMixer.SetFloat(soundGroup, Mathf.Log10(volume) * 20);
 		}
 
 		public void ChangeMusicVolume(float volume)
 		{
-			audioMixer.SetFloat(musicGroup, volume);
+			audioMixer.SetFloat(musicGroup, Mathf.Log10(volume) * 20);
 		}
 	}
 }

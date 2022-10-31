@@ -2,6 +2,6 @@ namespace ResumePuzzle.Interfaces
 {
 	public interface IInteractable
 	{
-		void OnInteracted();
+		void OnInteracted(IInventory inventory);
 	}
 }

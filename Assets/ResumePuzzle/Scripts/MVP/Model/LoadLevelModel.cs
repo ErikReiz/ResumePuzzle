@@ -13,12 +13,12 @@ namespace ResumePuzzle.Model
 		[Inject] private ISaveDataModel saveDataModel;
 		[Inject] private ScenesData scenesData;
 
-		private SceneInstance previousScene;
+		private SceneInstance currentScene;
 		#endregion
 
 		private AsyncOperationHandle LoadScene(ref AsyncOperationHandle<SceneInstance> currentScene)
 		{
-			currentScene.Completed += res => previousScene = res.Result;
+			currentScene.Completed += res => this.currentScene = res.Result;
 			return currentScene;
 		}
 
@@ -41,7 +41,7 @@ namespace ResumePuzzle.Model
 		{
 			try
 			{
-				AssetReference nextScene = scenesData.GetNextScene(previousScene);
+				AssetReference nextScene = scenesData.GetNextScene(currentScene);
 
 				var temp = Addressables.LoadSceneAsync(nextScene);
 				return LoadScene(ref temp);

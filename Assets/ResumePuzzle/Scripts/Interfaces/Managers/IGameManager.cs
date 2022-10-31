@@ -1,9 +1,9 @@
 namespace ResumePuzzle.Interfaces
 {
-	public interface IPlayer
+	public interface IGameManager
 	{
 		#region METHODS
-		void OnInteractInput();
+		void EndGame();
 		#endregion
 	}
 }

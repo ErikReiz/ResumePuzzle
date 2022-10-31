@@ -32,7 +32,7 @@ namespace ResumePuzzle.UI.Presenter
 
 		public void Interact()
 		{
-			player.OnInteract();
+			player.OnInteractInput();
 		}
 	}
 }

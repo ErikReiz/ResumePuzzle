@@ -2,7 +2,7 @@
 using DG.Tweening;
 using System.Collections.Generic;
 
-namespace ResumePuzzle.World.Interactable
+namespace ResumePuzzle.World.Prop
 {
     public class PropsAltar : MonoBehaviour
     {
