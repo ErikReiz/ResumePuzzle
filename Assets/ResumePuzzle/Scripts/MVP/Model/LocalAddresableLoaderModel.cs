@@ -1,7 +1,7 @@
+using ResumePuzzle.Interfaces;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using System.Threading.Tasks;
-using ResumePuzzle.Interfaces;
 
 namespace ResumePuzzle.Model
 {

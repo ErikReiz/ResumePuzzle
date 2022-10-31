@@ -3,72 +3,72 @@ using Assert = ModestTree.Assert;
 
 namespace Zenject.Tests
 {
-    [TestFixture]
-    public class TestValidationSettings
-    {
-        DiContainer Container
-        {
-            get; set;
-        }
+	[TestFixture]
+	public class TestValidationSettings
+	{
+		DiContainer Container
+		{
+			get; set;
+		}
 
-        [SetUp]
-        public void Setup()
-        {
-            Container = new DiContainer(true);
-        }
+		[SetUp]
+		public void Setup()
+		{
+			Container = new DiContainer(true);
+		}
 
-        // Doesn't work because the logged error is flagged as a test error
-        //[Test]
-        //public void TestValidationErrorLogOnly()
-        //{
-            //Container.Settings = new ZenjectSettings(ValidationErrorResponses.Log);
-            //Container.Bind<Bar>().AsSingle().NonLazy();
+		// Doesn't work because the logged error is flagged as a test error
+		//[Test]
+		//public void TestValidationErrorLogOnly()
+		//{
+		//Container.Settings = new ZenjectSettings(ValidationErrorResponses.Log);
+		//Container.Bind<Bar>().AsSingle().NonLazy();
 
-            //Container.ResolveRoots();
-        //}
+		//Container.ResolveRoots();
+		//}
 
-        [Test]
-        public void TestValidationErrorThrows()
-        {
-            Container.Settings = new ZenjectSettings(ValidationErrorResponses.Throw);
+		[Test]
+		public void TestValidationErrorThrows()
+		{
+			Container.Settings = new ZenjectSettings(ValidationErrorResponses.Throw);
 
-            Container.Bind<Bar>().AsSingle().NonLazy();
+			Container.Bind<Bar>().AsSingle().NonLazy();
 
-            Assert.Throws(() => Container.ResolveRoots());
-        }
+			Assert.Throws(() => Container.ResolveRoots());
+		}
 
-        [Test]
-        public void TestOutsideObjectGraph1()
-        {
-            Container.Settings = new ZenjectSettings(ValidationErrorResponses.Throw);
+		[Test]
+		public void TestOutsideObjectGraph1()
+		{
+			Container.Settings = new ZenjectSettings(ValidationErrorResponses.Throw);
 
-            Container.Bind<Bar>().AsSingle();
+			Container.Bind<Bar>().AsSingle();
 
-            Container.ResolveRoots();
-        }
+			Container.ResolveRoots();
+		}
 
-        [Test]
-        public void TestOutsideObjectGraph2()
-        {
-            Container.Settings = new ZenjectSettings(
-                ValidationErrorResponses.Throw, RootResolveMethods.All);
+		[Test]
+		public void TestOutsideObjectGraph2()
+		{
+			Container.Settings = new ZenjectSettings(
+				ValidationErrorResponses.Throw, RootResolveMethods.All);
 
-            Container.Bind<Bar>().AsSingle();
+			Container.Bind<Bar>().AsSingle();
 
-            Assert.Throws(() => Container.ResolveRoots());
-        }
+			Assert.Throws(() => Container.ResolveRoots());
+		}
 
-        public class Bar
-        {
-            public Bar(Foo foo)
-            {
-            }
-        }
+		public class Bar
+		{
+			public Bar(Foo foo)
+			{
+			}
+		}
 
-        public class Foo
-        {
-        }
-    }
+		public class Foo
+		{
+		}
+	}
 }
 
 

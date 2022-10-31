@@ -3,142 +3,142 @@ using Assert = ModestTree.Assert;
 
 namespace Zenject.Tests.Conditions
 {
-    [TestFixture]
-    public class TestConditionsIdentifier : ZenjectUnitTestFixture
-    {
-        class Test0
-        {
-        }
+	[TestFixture]
+	public class TestConditionsIdentifier : ZenjectUnitTestFixture
+	{
+		class Test0
+		{
+		}
 
-        class Test1
-        {
-            public Test1(
-                [Inject(Id ="foo")]
-                Test0 name1)
-            {
-            }
-        }
+		class Test1
+		{
+			public Test1(
+				[Inject(Id ="foo")]
+				Test0 name1)
+			{
+			}
+		}
 
-        class Test2
-        {
-            [Inject(Id ="foo")]
-            public Test0 name2 = null;
-        }
+		class Test2
+		{
+			[Inject(Id = "foo")]
+			public Test0 name2 = null;
+		}
 
-        [Test]
-        public void TestUnspecifiedNameConstructorInjection()
-        {
-            Container.Bind<Test1>().AsTransient().NonLazy();
-            Container.Bind<Test0>().AsTransient().NonLazy();
+		[Test]
+		public void TestUnspecifiedNameConstructorInjection()
+		{
+			Container.Bind<Test1>().AsTransient().NonLazy();
+			Container.Bind<Test0>().AsTransient().NonLazy();
 
-            Assert.Throws(
-                delegate { Container.Resolve<Test1>(); });
-        }
+			Assert.Throws(
+				delegate { Container.Resolve<Test1>(); });
+		}
 
-        [Test]
-        public void TestUnspecifiedNameFieldInjection()
-        {
-            Container.Bind<Test1>().AsTransient().NonLazy();
-            Container.Bind<Test2>().AsTransient().NonLazy();
+		[Test]
+		public void TestUnspecifiedNameFieldInjection()
+		{
+			Container.Bind<Test1>().AsTransient().NonLazy();
+			Container.Bind<Test2>().AsTransient().NonLazy();
 
-            Container.Bind<Test0>().AsTransient().NonLazy();
+			Container.Bind<Test0>().AsTransient().NonLazy();
 
-            Assert.Throws(
-                delegate { Container.Resolve<Test2>(); });
-        }
+			Assert.Throws(
+				delegate { Container.Resolve<Test2>(); });
+		}
 
-        [Test]
-        public void TestSuccessConstructorInjectionString()
-        {
-            Container.Bind<Test1>().AsTransient().NonLazy();
-            Container.Bind<Test2>().AsTransient().NonLazy();
+		[Test]
+		public void TestSuccessConstructorInjectionString()
+		{
+			Container.Bind<Test1>().AsTransient().NonLazy();
+			Container.Bind<Test2>().AsTransient().NonLazy();
 
-            Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
-            Container.Bind<Test0>().WithId("foo").FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().WithId("foo").FromInstance(new Test0()).NonLazy();
 
-            // Should not throw exceptions
-            Container.Resolve<Test1>();
+			// Should not throw exceptions
+			Container.Resolve<Test1>();
 
-            Assert.IsNotNull(Container.Resolve<Test1>());
-        }
+			Assert.IsNotNull(Container.Resolve<Test1>());
+		}
 
-        [Test]
-        public void TestSuccessFieldInjectionString()
-        {
-            Container.Bind<Test1>().AsTransient().NonLazy();
-            Container.Bind<Test2>().AsTransient().NonLazy();
+		[Test]
+		public void TestSuccessFieldInjectionString()
+		{
+			Container.Bind<Test1>().AsTransient().NonLazy();
+			Container.Bind<Test2>().AsTransient().NonLazy();
 
-            Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
-            Container.Bind<Test0>().WithId("foo").FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().WithId("foo").FromInstance(new Test0()).NonLazy();
 
-            Assert.IsNotNull(Container.Resolve<Test2>());
-        }
+			Assert.IsNotNull(Container.Resolve<Test2>());
+		}
 
-        class Test3
-        {
-            public Test3(
-                [Inject(Id ="TestValue2")]
-                Test0 test0)
-            {
-            }
-        }
+		class Test3
+		{
+			public Test3(
+				[Inject(Id ="TestValue2")]
+				Test0 test0)
+			{
+			}
+		}
 
-        class Test4
-        {
+		class Test4
+		{
 
-        }
+		}
 
-        [Test]
-        public void TestFailConstructorInjectionEnum()
-        {
-            Container.Bind<Test1>().AsTransient().NonLazy();
-            Container.Bind<Test2>().AsTransient().NonLazy();
-            Container.Bind<Test3>().AsTransient().NonLazy();
+		[Test]
+		public void TestFailConstructorInjectionEnum()
+		{
+			Container.Bind<Test1>().AsTransient().NonLazy();
+			Container.Bind<Test2>().AsTransient().NonLazy();
+			Container.Bind<Test3>().AsTransient().NonLazy();
 
-            Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
-            Container.Bind<Test0>().WithId("TestValue1").FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().WithId("TestValue1").FromInstance(new Test0()).NonLazy();
 
-            Assert.Throws(
-                delegate { Container.Resolve<Test3>(); });
-        }
+			Assert.Throws(
+				delegate { Container.Resolve<Test3>(); });
+		}
 
-        [Test]
-        public void TestSuccessConstructorInjectionEnum()
-        {
-            Container.Bind<Test3>().AsTransient().NonLazy();
+		[Test]
+		public void TestSuccessConstructorInjectionEnum()
+		{
+			Container.Bind<Test3>().AsTransient().NonLazy();
 
-            Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
-            Container.Bind<Test0>().WithId("TestValue2").FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().WithId("TestValue2").FromInstance(new Test0()).NonLazy();
 
-            // No exceptions
-            Container.Resolve<Test3>();
+			// No exceptions
+			Container.Resolve<Test3>();
 
-            Assert.IsNotNull(Container.Resolve<Test3>());
-        }
+			Assert.IsNotNull(Container.Resolve<Test3>());
+		}
 
-        [Test]
-        public void TestFailFieldInjectionEnum()
-        {
-            Container.Bind<Test1>().AsTransient().NonLazy();
-            Container.Bind<Test2>().AsTransient().NonLazy();
-            Container.Bind<Test3>().AsTransient().NonLazy();
+		[Test]
+		public void TestFailFieldInjectionEnum()
+		{
+			Container.Bind<Test1>().AsTransient().NonLazy();
+			Container.Bind<Test2>().AsTransient().NonLazy();
+			Container.Bind<Test3>().AsTransient().NonLazy();
 
-            Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
-            Container.Bind<Test0>().WithId("TestValue1").FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().WithId("TestValue1").FromInstance(new Test0()).NonLazy();
 
-            Assert.Throws(
-                delegate { Container.Resolve<Test3>(); });
-        }
+			Assert.Throws(
+				delegate { Container.Resolve<Test3>(); });
+		}
 
-        [Test]
-        public void TestSuccessFieldInjectionEnum()
-        {
-            Container.Bind<Test4>().AsTransient().NonLazy();
+		[Test]
+		public void TestSuccessFieldInjectionEnum()
+		{
+			Container.Bind<Test4>().AsTransient().NonLazy();
 
-            Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
-            Container.Bind<Test0>().WithId("TestValue3").FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().FromInstance(new Test0()).NonLazy();
+			Container.Bind<Test0>().WithId("TestValue3").FromInstance(new Test0()).NonLazy();
 
-            Assert.IsNotNull(Container.Resolve<Test4>());
-        }
-    }
+			Assert.IsNotNull(Container.Resolve<Test4>());
+		}
+	}
 }

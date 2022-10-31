@@ -1,8 +1,8 @@
-using Zenject;
-using UnityEngine;
-using ResumePuzzle.Player;
-using ResumePuzzle.Managers;
 using ResumePuzzle.Interfaces;
+using ResumePuzzle.Managers;
+using ResumePuzzle.Player;
+using UnityEngine;
+using Zenject;
 
 namespace ResumePuzzle.Containers
 {

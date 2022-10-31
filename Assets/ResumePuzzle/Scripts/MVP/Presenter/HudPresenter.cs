@@ -1,5 +1,5 @@
-using Zenject;
 using ResumePuzzle.Interfaces;
+using Zenject;
 
 namespace ResumePuzzle.UI.Presenter
 {
@@ -12,9 +12,9 @@ namespace ResumePuzzle.UI.Presenter
 		[Inject] private IView hudView;
 		[Inject] private IMenuPresenter pauseMenuPresenter;
 		[Inject] private IPlayer player;
-        #endregion
+		#endregion
 
-        public void Run()
+		public void Run()
 		{
 			hudView.Show();
 		}

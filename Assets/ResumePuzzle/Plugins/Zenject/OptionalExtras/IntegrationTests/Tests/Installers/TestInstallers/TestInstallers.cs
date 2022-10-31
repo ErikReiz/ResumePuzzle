@@ -1,48 +1,48 @@
 ﻿
-using System.Collections;
 using ModestTree;
+using System.Collections;
 using UnityEngine.TestTools;
 using Zenject.Tests.Installers.Installers;
 
 namespace Zenject.Tests.Installers
 {
-    public class TestInstallers : ZenjectIntegrationTestFixture
-    {
-        [UnityTest]
-        public IEnumerator TestZeroArgs()
-        {
-            PreInstall();
-            FooInstaller.Install(Container);
+	public class TestInstallers : ZenjectIntegrationTestFixture
+	{
+		[UnityTest]
+		public IEnumerator TestZeroArgs()
+		{
+			PreInstall();
+			FooInstaller.Install(Container);
 
-            PostInstall();
+			PostInstall();
 
-            FixtureUtil.AssertResolveCount<Foo>(Container, 1);
-            yield break;
-        }
+			FixtureUtil.AssertResolveCount<Foo>(Container, 1);
+			yield break;
+		}
 
-        [UnityTest]
-        public IEnumerator TestOneArg()
-        {
-            PreInstall();
-            BarInstaller.Install(Container, "blurg");
+		[UnityTest]
+		public IEnumerator TestOneArg()
+		{
+			PreInstall();
+			BarInstaller.Install(Container, "blurg");
 
-            PostInstall();
+			PostInstall();
 
-            Assert.IsEqual(Container.Resolve<string>(), "blurg");
-            yield break;
-        }
+			Assert.IsEqual(Container.Resolve<string>(), "blurg");
+			yield break;
+		}
 
-        [UnityTest]
-        public IEnumerator TestThreeArgs()
-        {
-            PreInstall();
-            QuxInstaller.Install(Container, "blurg", 2.0f, 1);
+		[UnityTest]
+		public IEnumerator TestThreeArgs()
+		{
+			PreInstall();
+			QuxInstaller.Install(Container, "blurg", 2.0f, 1);
 
-            PostInstall();
+			PostInstall();
 
-            Assert.IsEqual(Container.Resolve<string>(), "blurg");
-            yield break;
-        }
-    }
+			Assert.IsEqual(Container.Resolve<string>(), "blurg");
+			yield break;
+		}
+	}
 }
 

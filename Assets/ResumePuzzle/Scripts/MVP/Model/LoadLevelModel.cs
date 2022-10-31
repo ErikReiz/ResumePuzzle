@@ -1,14 +1,14 @@
-using Zenject;
 using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
+using Zenject;
 
 namespace ResumePuzzle.Model
 {
-    public class LoadLevelModel : ILoadLevelModel
-    {
+	public class LoadLevelModel : ILoadLevelModel
+	{
 		#region FIELDS
 		[Inject] private ISaveDataModel saveDataModel;
 		[Inject] private ScenesData scenesData;

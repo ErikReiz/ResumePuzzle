@@ -1,8 +1,8 @@
 namespace ResumePuzzle.Interfaces
 {
-    public interface IMenuView : IView
-    {
-        void ShowCanvas();
-        void HideCanvas();
-    }
+	public interface IMenuView : IView
+	{
+		void ShowCanvas();
+		void HideCanvas();
+	}
 }

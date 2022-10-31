@@ -5,48 +5,48 @@ using Assert = ModestTree.Assert;
 
 namespace Zenject.Tests.Bindings
 {
-    [TestFixture]
-    public class TestMemoryPoolCustomFactory : ZenjectUnitTestFixture
-    {
-        [Test]
-        public void TestFromBinding()
-        {
-            Container.BindMemoryPool<Qux, Qux.Pool>().FromIFactory(b => b.To<CustomFactory>().AsCached());
+	[TestFixture]
+	public class TestMemoryPoolCustomFactory : ZenjectUnitTestFixture
+	{
+		[Test]
+		public void TestFromBinding()
+		{
+			Container.BindMemoryPool<Qux, Qux.Pool>().FromIFactory(b => b.To<CustomFactory>().AsCached());
 
-            var pool = Container.Resolve<Qux.Pool>();
+			var pool = Container.Resolve<Qux.Pool>();
 
-            var qux = pool.Spawn();
+			var qux = pool.Spawn();
 
-            Assert.IsEqual(pool.NumTotal, 1);
-        }
+			Assert.IsEqual(pool.NumTotal, 1);
+		}
 
-        [Test]
-        public void TestFromRuntime()
-        {
-            var settings = new MemoryPoolSettings(0, int.MaxValue, PoolExpandMethods.OneAtATime);
+		[Test]
+		public void TestFromRuntime()
+		{
+			var settings = new MemoryPoolSettings(0, int.MaxValue, PoolExpandMethods.OneAtATime);
 
-            var pool = Container.Instantiate<Qux.Pool>(new object[] { settings, new CustomFactory() });
+			var pool = Container.Instantiate<Qux.Pool>(new object[] { settings, new CustomFactory() });
 
-            var qux = pool.Spawn();
+			var qux = pool.Spawn();
 
-            Assert.IsEqual(pool.NumTotal, 1);
-        }
+			Assert.IsEqual(pool.NumTotal, 1);
+		}
 
-        class CustomFactory : IFactory<Qux>
-        {
-            public Qux Create()
-            {
-                return new Qux();
-            }
-        }
+		class CustomFactory : IFactory<Qux>
+		{
+			public Qux Create()
+			{
+				return new Qux();
+			}
+		}
 
-        class Qux
-        {
-            public class Pool : MemoryPool<Qux>
-            {
-            }
-        }
-    }
+		class Qux
+		{
+			public class Pool : MemoryPool<Qux>
+			{
+			}
+		}
+	}
 }
 
 

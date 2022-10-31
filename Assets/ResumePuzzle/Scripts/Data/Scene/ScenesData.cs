@@ -9,7 +9,7 @@ namespace ResumePuzzle.Data
 	{
 		#region SERIALIZABLE FIELDS
 		[SerializeField] private AssetReference mainMenu;
-	
+
 		[Tooltip("Put scenes in the right order in which they will be loaded")]
 		[SerializeField] private AssetReference[] scenes;
 		#endregion
@@ -28,10 +28,10 @@ namespace ResumePuzzle.Data
 			}
 			else
 			{
-				for(int i = 0; i < scenes.Length; i++)
+				for (int i = 0; i < scenes.Length; i++)
 				{
-					
-					if(AddressablesUtility.GetAddressFromAssetReference(scenes[i]) == sceneName)
+
+					if (AddressablesUtility.GetAddressFromAssetReference(scenes[i]) == sceneName)
 						return ContainsIndex(i + 1) ? scenes[i] : null;
 				}
 
@@ -41,7 +41,7 @@ namespace ResumePuzzle.Data
 
 		private bool ContainsIndex(int index)
 		{
-			if(scenes.Length <= index)
+			if (scenes.Length <= index)
 				return false;
 			else
 				return true;

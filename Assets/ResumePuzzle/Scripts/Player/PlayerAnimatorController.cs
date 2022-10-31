@@ -1,10 +1,9 @@
-using UnityEngine;
 using ResumePuzzle.Interfaces;
+using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.AddressableAssets;
 namespace ResumePuzzle.Player
 {
-	public class PlayerAnimatorController : MonoBehaviour, IPlayerAnimatorController 
+	public class PlayerAnimatorController : MonoBehaviour, IPlayerAnimatorController
 	{
 		#region FIELDS
 		private Animator animator;

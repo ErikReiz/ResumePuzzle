@@ -1,11 +1,11 @@
-using Zenject;
-using UnityEngine;
 using ResumePuzzle.Interfaces;
+using UnityEngine;
+using Zenject;
 
 namespace ResumePuzzle.Managers
 {
-    public class StartupManager : MonoBehaviour
-    {
+	public class StartupManager : MonoBehaviour
+	{
 		#region FIELDS
 		[Inject] private ILoadLevelModel loadLevelModel;
 		#endregion

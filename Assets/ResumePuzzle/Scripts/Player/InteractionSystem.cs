@@ -1,5 +1,5 @@
-using UnityEngine;
 using ResumePuzzle.Interfaces;
+using UnityEngine;
 
 namespace ResumePuzzle.Player
 {

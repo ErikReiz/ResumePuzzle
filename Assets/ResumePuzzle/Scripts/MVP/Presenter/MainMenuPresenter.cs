@@ -1,5 +1,5 @@
-using Zenject;
 using ResumePuzzle.Interfaces;
+using Zenject;
 
 namespace ResumePuzzle.UI.Presenter
 {
@@ -15,7 +15,7 @@ namespace ResumePuzzle.UI.Presenter
 		{
 			menuView.Show();
 		}
-		
+
 		public void Close()
 		{
 			menuView.Hide();

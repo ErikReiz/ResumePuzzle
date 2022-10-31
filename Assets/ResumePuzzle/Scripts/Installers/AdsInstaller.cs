@@ -1,7 +1,7 @@
-using Zenject;
-using ResumePuzzle.Managers;
 using ResumePuzzle.Interfaces;
+using ResumePuzzle.Managers;
 using ResumePuzzle.Monetization;
+using Zenject;
 
 namespace ResumePuzzle.Containers
 {

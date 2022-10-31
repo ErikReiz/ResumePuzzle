@@ -1,8 +1,8 @@
 namespace Zenject
 {
-    public interface IAnimatorMoveHandler
-    {
-        void OnAnimatorMove();
-    }
+	public interface IAnimatorMoveHandler
+	{
+		void OnAnimatorMove();
+	}
 }
 

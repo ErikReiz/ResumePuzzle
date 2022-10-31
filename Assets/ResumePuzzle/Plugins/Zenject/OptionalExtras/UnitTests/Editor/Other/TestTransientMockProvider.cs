@@ -2,24 +2,24 @@ using NUnit.Framework;
 
 namespace Zenject.Tests.Other
 {
-    [TestFixture]
-    public class TestTransientMockProvider : ZenjectUnitTestFixture
-    {
-        public interface IFoo
-        {
-            int GetBar();
-        }
+	[TestFixture]
+	public class TestTransientMockProvider : ZenjectUnitTestFixture
+	{
+		public interface IFoo
+		{
+			int GetBar();
+		}
 
-        [Test]
-        public void TestCase1()
-        {
-            // Commented out because this requires that zenject be installed with mocking support which isn't always the case
+		[Test]
+		public void TestCase1()
+		{
+			// Commented out because this requires that zenject be installed with mocking support which isn't always the case
 
-            //Container.FallbackProvider = new TransientMockProvider(Container);
+			//Container.FallbackProvider = new TransientMockProvider(Container);
 
-            //var foo = Container.Resolve<IFoo>();
+			//var foo = Container.Resolve<IFoo>();
 
-            //Assert.IsEqual(foo.GetBar(), 0);
-        }
-    }
+			//Assert.IsEqual(foo.GetBar(), 0);
+		}
+	}
 }

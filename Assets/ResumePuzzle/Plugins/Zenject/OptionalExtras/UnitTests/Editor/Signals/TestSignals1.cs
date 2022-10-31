@@ -1,124 +1,124 @@
-using System;
 using NUnit.Framework;
+using System;
 using Assert = ModestTree.Assert;
 
 namespace Zenject.Tests.Signals
 {
-    [TestFixture]
-    public class TestSignals1 : ZenjectUnitTestFixture
-    {
-        [Test]
-        public void TestMissingDeclaration()
-        {
-            SignalBusInstaller.Install(Container);
+	[TestFixture]
+	public class TestSignals1 : ZenjectUnitTestFixture
+	{
+		[Test]
+		public void TestMissingDeclaration()
+		{
+			SignalBusInstaller.Install(Container);
 
-            var signalBus = Container.Resolve<SignalBus>();
+			var signalBus = Container.Resolve<SignalBus>();
 
-            Assert.Throws(() => signalBus.Fire<FooSignal>());
-        }
+			Assert.Throws(() => signalBus.Fire<FooSignal>());
+		}
 
-        [Test]
-        public void TestSubscribeAndUnsubscribe()
-        {
-            SignalBusInstaller.Install(Container);
+		[Test]
+		public void TestSubscribeAndUnsubscribe()
+		{
+			SignalBusInstaller.Install(Container);
 
-            Container.DeclareSignal<FooSignal>();
+			Container.DeclareSignal<FooSignal>();
 
-            var signalBus = Container.Resolve<SignalBus>();
+			var signalBus = Container.Resolve<SignalBus>();
 
-            bool received = false;
+			bool received = false;
 
-            Action callback = () => received = true;
-            signalBus.Subscribe<FooSignal>(callback);
+			Action callback = () => received = true;
+			signalBus.Subscribe<FooSignal>(callback);
 
-            Assert.That(!received);
-            signalBus.Fire<FooSignal>();
-            Assert.That(received);
+			Assert.That(!received);
+			signalBus.Fire<FooSignal>();
+			Assert.That(received);
 
-            received = false;
-            signalBus.Fire<FooSignal>();
-            Assert.That(received);
+			received = false;
+			signalBus.Fire<FooSignal>();
+			Assert.That(received);
 
-            signalBus.Unsubscribe<FooSignal>(callback);
+			signalBus.Unsubscribe<FooSignal>(callback);
 
-            received = false;
-            signalBus.Fire<FooSignal>();
-            Assert.That(!received);
-        }
+			received = false;
+			signalBus.Fire<FooSignal>();
+			Assert.That(!received);
+		}
 
-        [Test]
-        public void TestWithArgs()
-        {
-            SignalBusInstaller.Install(Container);
+		[Test]
+		public void TestWithArgs()
+		{
+			SignalBusInstaller.Install(Container);
 
-            Container.DeclareSignal<FooSignal>();
+			Container.DeclareSignal<FooSignal>();
 
-            var signalBus = Container.Resolve<SignalBus>();
+			var signalBus = Container.Resolve<SignalBus>();
 
-            FooSignal received = null;
+			FooSignal received = null;
 
-            signalBus.Subscribe<FooSignal>(x => received = x);
+			signalBus.Subscribe<FooSignal>(x => received = x);
 
-            var sent = new FooSignal();
+			var sent = new FooSignal();
 
-            signalBus.Fire(sent);
+			signalBus.Fire(sent);
 
-            Assert.IsEqual(received, sent);
-        }
+			Assert.IsEqual(received, sent);
+		}
 
-        [Test]
-        public void TestUnsubscribeWithoutSubscribe()
-        {
-            SignalBusInstaller.Install(Container);
+		[Test]
+		public void TestUnsubscribeWithoutSubscribe()
+		{
+			SignalBusInstaller.Install(Container);
 
-            Container.DeclareSignal<FooSignal>();
+			Container.DeclareSignal<FooSignal>();
 
-            var signalBus = Container.Resolve<SignalBus>();
+			var signalBus = Container.Resolve<SignalBus>();
 
-            Action callback = () => {};
+			Action callback = () => { };
 
-            Assert.Throws(() => signalBus.Unsubscribe<FooSignal>(callback));
+			Assert.Throws(() => signalBus.Unsubscribe<FooSignal>(callback));
 
-            signalBus.TryUnsubscribe<FooSignal>(callback);
+			signalBus.TryUnsubscribe<FooSignal>(callback);
 
-            signalBus.Subscribe<FooSignal>(callback);
-            signalBus.Unsubscribe<FooSignal>(callback);
-        }
+			signalBus.Subscribe<FooSignal>(callback);
+			signalBus.Unsubscribe<FooSignal>(callback);
+		}
 
-        [Test]
-        public void TestUntypedSubscribe()
-        {
-            SignalBusInstaller.Install(Container);
+		[Test]
+		public void TestUntypedSubscribe()
+		{
+			SignalBusInstaller.Install(Container);
 
-            Container.DeclareSignal<FooSignal>();
-            Container.DeclareSignal<BarSignal>();
+			Container.DeclareSignal<FooSignal>();
+			Container.DeclareSignal<BarSignal>();
 
-            var signalBus = Container.Resolve<SignalBus>();
+			var signalBus = Container.Resolve<SignalBus>();
 
-            object received = null;
+			object received = null;
 
-            signalBus.Subscribe(typeof(FooSignal), x =>
-                {
-                    Assert.That(x is FooSignal);
-                    received = x;
-                });
+			signalBus.Subscribe(typeof(FooSignal), x =>
+				{
+					Assert.That(x is FooSignal);
+					received = x;
+				});
 
-            var data = new FooSignal();
+			var data = new FooSignal();
 
-            signalBus.Fire(data);
+			signalBus.Fire(data);
 
-            Assert.IsEqual(received, data);
+			Assert.IsEqual(received, data);
 
-            signalBus.Fire(new BarSignal());
-        }
+			signalBus.Fire(new BarSignal());
+		}
 
-        public class FooSignal
-        {
-        }
+		public class FooSignal
+		{
+		}
 
-        public class BarSignal
-        {
-            public string Value;
-        }
-    }
+		public class BarSignal
+		{
+			public string Value;
+		}
+	}
 }

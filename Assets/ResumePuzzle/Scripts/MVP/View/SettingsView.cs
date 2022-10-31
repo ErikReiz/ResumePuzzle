@@ -1,11 +1,11 @@
-using TMPro;
-using Zenject;
-using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI;
 using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
 using System.Threading.Tasks;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 namespace ResumePuzzle.UI.View
 {
@@ -51,7 +51,7 @@ namespace ResumePuzzle.UI.View
 		{
 			return transform.DOLocalMoveX(0, tweeningLength).AsyncWaitForCompletion();
 		}
-	
+
 		public Task Hide()
 		{
 			return transform.DOLocalMoveX(-IView.offScreenCoordinates, tweeningLength).AsyncWaitForCompletion();

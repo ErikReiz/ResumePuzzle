@@ -1,8 +1,8 @@
-using System;
-using Zenject;
-using UnityEngine.SceneManagement;
 using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
+using System;
+using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace ResumePuzzle.UI.Presenter
 {
@@ -37,7 +37,7 @@ namespace ResumePuzzle.UI.Presenter
 			menuView.ShowCanvas();
 			menuView.Show();
 		}
-		
+
 		public void Close()
 		{
 			menuView.Hide();

@@ -1,8 +1,8 @@
+using ResumePuzzle.Interfaces;
+using ResumePuzzle.World.Item;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using ResumePuzzle.World.Item;
-using ResumePuzzle.Interfaces;
-using System.Collections.Generic;
 
 namespace ResumePuzzle.Player
 {
@@ -35,7 +35,7 @@ namespace ResumePuzzle.Player
 
 		private void Update()
 		{
-			playerRigidbody.velocity = direction * movementSpeed;	
+			playerRigidbody.velocity = direction * movementSpeed;
 		}
 
 		public void OnMove(InputAction.CallbackContext context)

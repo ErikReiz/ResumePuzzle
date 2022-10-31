@@ -3,43 +3,43 @@ using Assert = ModestTree.Assert;
 
 namespace Zenject.Tests.Bindings
 {
-    [TestFixture]
-    public class TestFactoryFromMethod0 : ZenjectUnitTestFixture
-    {
-        [Test]
-        public void TestSelf()
-        {
-            var foo = new Foo();
+	[TestFixture]
+	public class TestFactoryFromMethod0 : ZenjectUnitTestFixture
+	{
+		[Test]
+		public void TestSelf()
+		{
+			var foo = new Foo();
 
-            Container.BindFactory<Foo, Foo.Factory>().FromMethod(c => foo).NonLazy();
+			Container.BindFactory<Foo, Foo.Factory>().FromMethod(c => foo).NonLazy();
 
-            Assert.IsEqual(Container.Resolve<Foo.Factory>().Create(), foo);
-        }
+			Assert.IsEqual(Container.Resolve<Foo.Factory>().Create(), foo);
+		}
 
-        [Test]
-        public void TestConcrete()
-        {
-            var foo = new Foo();
+		[Test]
+		public void TestConcrete()
+		{
+			var foo = new Foo();
 
-            Container.BindFactory<IFoo, IFooFactory>().FromMethod(c => foo).NonLazy();
+			Container.BindFactory<IFoo, IFooFactory>().FromMethod(c => foo).NonLazy();
 
-            Assert.IsEqual(Container.Resolve<IFooFactory>().Create(), foo);
-        }
+			Assert.IsEqual(Container.Resolve<IFooFactory>().Create(), foo);
+		}
 
-        interface IFoo
-        {
-        }
+		interface IFoo
+		{
+		}
 
-        class IFooFactory : PlaceholderFactory<IFoo>
-        {
-        }
+		class IFooFactory : PlaceholderFactory<IFoo>
+		{
+		}
 
-        class Foo : IFoo
-        {
-            public class Factory : PlaceholderFactory<Foo>
-            {
-            }
-        }
-    }
+		class Foo : IFoo
+		{
+			public class Factory : PlaceholderFactory<Foo>
+			{
+			}
+		}
+	}
 }
 

@@ -1,7 +1,5 @@
-using Zenject;
-using UnityEngine;
 using ResumePuzzle.Interfaces;
-using UnityEngine.Audio;
+using UnityEngine;
 
 namespace ResumePuzzle.Managers
 {

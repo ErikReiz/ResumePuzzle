@@ -1,8 +1,8 @@
-using Zenject;
 using ResumePuzzle.Factory;
 using ResumePuzzle.Interfaces;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Threading.Tasks;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using Zenject;
 
 namespace ResumePuzzle.UI.Presenter
 {

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace ResumePuzzle.Interfaces
 {
 	public interface IMusicManager

@@ -1,11 +1,11 @@
-using TMPro;
-using Zenject;
 using DG.Tweening;
-using UnityEngine;
-using UnityEngine.UI;
 using ResumePuzzle.Interfaces;
 using System.Collections;
 using System.Threading.Tasks;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 namespace ResumePuzzle.UI.View
 {

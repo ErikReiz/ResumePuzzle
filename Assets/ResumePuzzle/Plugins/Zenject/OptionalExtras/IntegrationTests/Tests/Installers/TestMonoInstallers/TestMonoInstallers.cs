@@ -1,57 +1,57 @@
 ﻿
-using System.Collections;
 using ModestTree;
+using System.Collections;
 using UnityEngine.TestTools;
 using Zenject.Tests.Installers.MonoInstallers;
 
 namespace Zenject.Tests.Installers
 {
-    public class TestMonoInstallers : ZenjectIntegrationTestFixture
-    {
-        [UnityTest]
-        public IEnumerator TestBadResourcePath()
-        {
-            PreInstall();
-            Assert.Throws(() => FooInstaller.InstallFromResource("TestMonoInstallers/SDFSDFSDF", Container));
-            PostInstall();
-            yield break;
-        }
+	public class TestMonoInstallers : ZenjectIntegrationTestFixture
+	{
+		[UnityTest]
+		public IEnumerator TestBadResourcePath()
+		{
+			PreInstall();
+			Assert.Throws(() => FooInstaller.InstallFromResource("TestMonoInstallers/SDFSDFSDF", Container));
+			PostInstall();
+			yield break;
+		}
 
-        [UnityTest]
-        public IEnumerator TestZeroArgs()
-        {
-            PreInstall();
-            FooInstaller.InstallFromResource("TestMonoInstallers/FooInstaller", Container);
+		[UnityTest]
+		public IEnumerator TestZeroArgs()
+		{
+			PreInstall();
+			FooInstaller.InstallFromResource("TestMonoInstallers/FooInstaller", Container);
 
-            PostInstall();
+			PostInstall();
 
-            FixtureUtil.AssertResolveCount<Foo>(Container, 1);
-            yield break;
-        }
+			FixtureUtil.AssertResolveCount<Foo>(Container, 1);
+			yield break;
+		}
 
-        [UnityTest]
-        public IEnumerator TestOneArg()
-        {
-            PreInstall();
-            BarInstaller.InstallFromResource("TestMonoInstallers/BarInstaller", Container, "blurg");
+		[UnityTest]
+		public IEnumerator TestOneArg()
+		{
+			PreInstall();
+			BarInstaller.InstallFromResource("TestMonoInstallers/BarInstaller", Container, "blurg");
 
-            PostInstall();
+			PostInstall();
 
-            Assert.IsEqual(Container.Resolve<string>(), "blurg");
-            yield break;
-        }
+			Assert.IsEqual(Container.Resolve<string>(), "blurg");
+			yield break;
+		}
 
-        [UnityTest]
-        public IEnumerator TestThreeArgs()
-        {
-            PreInstall();
-            QuxInstaller.InstallFromResource("TestMonoInstallers/QuxInstaller", Container, "blurg", 2.0f, 1);
+		[UnityTest]
+		public IEnumerator TestThreeArgs()
+		{
+			PreInstall();
+			QuxInstaller.InstallFromResource("TestMonoInstallers/QuxInstaller", Container, "blurg", 2.0f, 1);
 
-            PostInstall();
+			PostInstall();
 
-            Assert.IsEqual(Container.Resolve<string>(), "blurg");
-            yield break;
-        }
-    }
+			Assert.IsEqual(Container.Resolve<string>(), "blurg");
+			yield break;
+		}
+	}
 }
 

@@ -1,9 +1,9 @@
-using Zenject;
 using DG.Tweening;
-using UnityEngine;
-using UnityEngine.UI;
 using ResumePuzzle.Interfaces;
 using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 namespace ResumePuzzle.UI.View
 {

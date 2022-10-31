@@ -1,8 +1,8 @@
-using Zenject;
-using UnityEngine;
-using System.Collections.Generic;
 using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
+using System.Collections.Generic;
+using UnityEngine;
+using Zenject;
 
 namespace ResumePuzzle.Model
 {

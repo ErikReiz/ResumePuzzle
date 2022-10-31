@@ -9,7 +9,7 @@ namespace ResumePuzzle.Managers
 		#region FIELDS
 		[Inject] private ILoadScenePresenter loadScenePresenter;
 		#endregion
-		
+
 		public void EndGame()
 		{
 			loadScenePresenter.LoadNextScene();

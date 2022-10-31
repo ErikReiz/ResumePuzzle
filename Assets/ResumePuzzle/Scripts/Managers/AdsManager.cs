@@ -1,9 +1,8 @@
-using Zenject;
-using UnityEngine;
-using UnityEngine.Advertisements;
 using ResumePuzzle.Interfaces;
 using ResumePuzzle.Monetization;
-using UnityEngine.Events;
+using UnityEngine;
+using UnityEngine.Advertisements;
+using Zenject;
 
 namespace ResumePuzzle.Managers
 {
@@ -33,7 +32,7 @@ namespace ResumePuzzle.Managers
 		{
 			interstitialShower.ShowAds();
 		}
-		
+
 		#region INITIALIZATION
 		public void OnInitializationComplete()
 		{
@@ -42,7 +41,7 @@ namespace ResumePuzzle.Managers
 
 		public void OnInitializationFailed(UnityAdsInitializationError error, string message)
 		{
-			
+
 		}
 
 		#endregion

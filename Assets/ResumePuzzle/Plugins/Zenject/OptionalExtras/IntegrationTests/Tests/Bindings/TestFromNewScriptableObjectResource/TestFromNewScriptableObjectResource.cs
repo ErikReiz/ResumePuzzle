@@ -1,101 +1,101 @@
 
-using System.Collections;
 using ModestTree;
+using System.Collections;
 using UnityEngine.TestTools;
 using Zenject.Tests.Bindings.FromNewScriptableObjectResource;
 
 namespace Zenject.Tests.Bindings
 {
-    public class TestFromNewScriptableObjectResource : ZenjectIntegrationTestFixture
-    {
-        const string PathPrefix = "TestFromNewScriptableObjectResource/";
+	public class TestFromNewScriptableObjectResource : ZenjectIntegrationTestFixture
+	{
+		const string PathPrefix = "TestFromNewScriptableObjectResource/";
 
-        [UnityTest]
-        public IEnumerator TestTransientError()
-        {
-            PreInstall();
-            // Validation should detect that it doesn't exist
-            Container.Bind<Foo>().FromNewScriptableObjectResource(PathPrefix + "asdfasdfas").AsTransient().NonLazy();
+		[UnityTest]
+		public IEnumerator TestTransientError()
+		{
+			PreInstall();
+			// Validation should detect that it doesn't exist
+			Container.Bind<Foo>().FromNewScriptableObjectResource(PathPrefix + "asdfasdfas").AsTransient().NonLazy();
 
-            Assert.Throws(() => PostInstall());
-            yield break;
-        }
+			Assert.Throws(() => PostInstall());
+			yield break;
+		}
 
-        [UnityTest]
-        public IEnumerator TestTransient()
-        {
-            PreInstall();
-            Foo.InstanceCount = 0;
-            Container.Bind<Foo>().FromNewScriptableObjectResource(PathPrefix + "Foo").AsTransient();
+		[UnityTest]
+		public IEnumerator TestTransient()
+		{
+			PreInstall();
+			Foo.InstanceCount = 0;
+			Container.Bind<Foo>().FromNewScriptableObjectResource(PathPrefix + "Foo").AsTransient();
 
-            PostInstall();
+			PostInstall();
 
-            var foo = Container.Resolve<Foo>();
-            Assert.That(foo.WasInjected);
+			var foo = Container.Resolve<Foo>();
+			Assert.That(foo.WasInjected);
 
-            Assert.IsEqual(Foo.InstanceCount, 1);
+			Assert.IsEqual(Foo.InstanceCount, 1);
 
-            var foo2 = Container.Resolve<Foo>();
-            Assert.IsNotEqual(foo, foo2);
-            Assert.IsEqual(Foo.InstanceCount, 2);
-            yield break;
-        }
+			var foo2 = Container.Resolve<Foo>();
+			Assert.IsNotEqual(foo, foo2);
+			Assert.IsEqual(Foo.InstanceCount, 2);
+			yield break;
+		}
 
-        [UnityTest]
-        public IEnumerator TestSingle()
-        {
-            PreInstall();
-            Foo.InstanceCount = 0;
+		[UnityTest]
+		public IEnumerator TestSingle()
+		{
+			PreInstall();
+			Foo.InstanceCount = 0;
 
-            Container.Bind(typeof(IFoo), typeof(Foo)).To<Foo>().FromNewScriptableObjectResource(PathPrefix + "Foo").AsSingle();
+			Container.Bind(typeof(IFoo), typeof(Foo)).To<Foo>().FromNewScriptableObjectResource(PathPrefix + "Foo").AsSingle();
 
-            PostInstall();
+			PostInstall();
 
-            Container.Resolve<IFoo>();
-            Assert.IsEqual(Foo.InstanceCount, 1);
-            yield break;
-        }
+			Container.Resolve<IFoo>();
+			Assert.IsEqual(Foo.InstanceCount, 1);
+			yield break;
+		}
 
-        [UnityTest]
-        public IEnumerator TestAbstractBinding()
-        {
-            PreInstall();
-            Foo.InstanceCount = 0;
+		[UnityTest]
+		public IEnumerator TestAbstractBinding()
+		{
+			PreInstall();
+			Foo.InstanceCount = 0;
 
-            Container.Bind<IFoo>().To<Foo>()
-                .FromNewScriptableObjectResource(PathPrefix + "Foo").AsSingle().NonLazy();
+			Container.Bind<IFoo>().To<Foo>()
+				.FromNewScriptableObjectResource(PathPrefix + "Foo").AsSingle().NonLazy();
 
-            PostInstall();
+			PostInstall();
 
-            Container.Resolve<IFoo>();
-            Assert.IsEqual(Foo.InstanceCount, 1);
-            yield break;
-        }
+			Container.Resolve<IFoo>();
+			Assert.IsEqual(Foo.InstanceCount, 1);
+			yield break;
+		}
 
-        [UnityTest]
-        public IEnumerator TestWithArgumentsFail()
-        {
-            PreInstall();
-            Container.Bind<Bob>()
-                .FromNewScriptableObjectResource(PathPrefix + "Bob").AsSingle().NonLazy();
+		[UnityTest]
+		public IEnumerator TestWithArgumentsFail()
+		{
+			PreInstall();
+			Container.Bind<Bob>()
+				.FromNewScriptableObjectResource(PathPrefix + "Bob").AsSingle().NonLazy();
 
-            Assert.Throws(() => PostInstall());
-            yield break;
-        }
+			Assert.Throws(() => PostInstall());
+			yield break;
+		}
 
-        [UnityTest]
-        public IEnumerator TestWithArguments()
-        {
-            PreInstall();
-            Container.Bind<Bob>()
-                .FromNewScriptableObjectResource(PathPrefix + "Bob").AsSingle()
-                .WithArguments("test1").NonLazy();
+		[UnityTest]
+		public IEnumerator TestWithArguments()
+		{
+			PreInstall();
+			Container.Bind<Bob>()
+				.FromNewScriptableObjectResource(PathPrefix + "Bob").AsSingle()
+				.WithArguments("test1").NonLazy();
 
-            PostInstall();
+			PostInstall();
 
-            Assert.IsEqual(Container.Resolve<Bob>().Arg, "test1");
-            yield break;
-        }
-    }
+			Assert.IsEqual(Container.Resolve<Bob>().Arg, "test1");
+			yield break;
+		}
+	}
 }
 

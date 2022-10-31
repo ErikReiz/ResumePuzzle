@@ -1,6 +1,6 @@
+using ResumePuzzle.Interfaces;
 using System.IO;
 using System.Xml.Serialization;
-using ResumePuzzle.Interfaces;
 
 namespace ResumePuzzle.Data
 {
@@ -20,14 +20,14 @@ namespace ResumePuzzle.Data
 			XmlSerializer serializer = new(typeof(T));
 			StringReader reader = new(objectToDeserialize);
 
-            try
-            {
+			try
+			{
 				return (T)serializer.Deserialize(reader);
-            }
+			}
 			catch
-            {
+			{
 				return default;
-            }
+			}
 		}
 	}
 }
