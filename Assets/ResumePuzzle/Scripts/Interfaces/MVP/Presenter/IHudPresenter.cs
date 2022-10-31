@@ -4,6 +4,7 @@ namespace ResumePuzzle.Interfaces
 	{
 		#region METHODS
 		void PauseGame();
+		void Interact();
 		#endregion
 	}
 }

@@ -1,27 +1,28 @@
-using UnityEngine;
 using ResumePuzzle.Interfaces;
+using UnityEngine;
 
 namespace ResumePuzzle.Managers
 {
 	public class AudioManager : MonoBehaviour, ISoundManager, IMusicManager
 	{
-		#region PROPERTIES
-		public float SoundVolume { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public float MusicVolume { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-		public bool SoundEnabled { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public bool MusicEnabled { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public bool IsMusicPlaying { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		#region SERIALIZABLE FIELDS
+		[SerializeField] private AudioSource musicSource;
+		[SerializeField] private AudioSource sfxSource;
 		#endregion
 
-		public void PlayMusic(AudioClip audio, float volume)
+		private void Start()
 		{
-			throw new System.NotImplementedException();
+			PlayMusic();
 		}
 
-		public void PlaySound(AudioClip audio, float volume)
+		public void PlayMusic()
 		{
-			throw new System.NotImplementedException();
+			musicSource.Play();
+		}
+
+		public void PlaySound(AudioClip audio)
+		{
+			sfxSource.PlayOneShot(audio);
 		}
 	}
 }

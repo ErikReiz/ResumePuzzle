@@ -1,11 +1,12 @@
+using ResumePuzzle.Interfaces;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace ResumePuzzle.Data
 {
-	public static class XMLHelper
+	public class XMLHelper : ISerializationHelper
 	{
-		public static string Serialize<T>(T objectToSerialieze)
+		public string Serialize<T>(T objectToSerialieze)
 		{
 			XmlSerializer serializer = new(typeof(T));
 			StringWriter writer = new();
@@ -14,18 +15,19 @@ namespace ResumePuzzle.Data
 			return writer.ToString();
 		}
 
-		public static T Deserealize<T>(string objectToDeserialize)
+		public T Deserealize<T>(string objectToDeserialize)
 		{
 			XmlSerializer serializer = new(typeof(T));
 			StringReader reader = new(objectToDeserialize);
-            try
-            {
+
+			try
+			{
 				return (T)serializer.Deserialize(reader);
-            }
+			}
 			catch
-            {
+			{
 				return default;
-            }
+			}
 		}
 	}
 }

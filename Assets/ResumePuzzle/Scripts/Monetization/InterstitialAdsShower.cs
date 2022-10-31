@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.Advertisements;
 
 namespace ResumePuzzle.Monetization
@@ -15,10 +14,10 @@ namespace ResumePuzzle.Monetization
 			Advertisement.Load(androidAdID, this);
 			Advertisement.Show(androidAdID, this);
 		}
-		
-		public void OnUnityAdsAdLoaded(string placementId){}
 
-		public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message) //TODO Analytics
+		public void OnUnityAdsAdLoaded(string placementId) { }
+
+		public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
 		{
 			Debug.Log($"Load failed {error} {message}");
 		}
@@ -28,7 +27,7 @@ namespace ResumePuzzle.Monetization
 			Debug.Log($"Show failed {error} {message}");
 		}
 
-		public void OnUnityAdsShowStart(string placementId){}
+		public void OnUnityAdsShowStart(string placementId) { }
 
 		public void OnUnityAdsShowClick(string placementId)
 		{
