@@ -5,7 +5,7 @@ namespace ResumePuzzle.Interfaces
 	public interface ISettingsView : IView
 	{
 		#region METHODS
-		void SetSettingsView(SettingsSaveData settingsPresset);
+		void SetSettingsView(ref SettingsSaveData settingsPresset);
 		#endregion
 	}
 }

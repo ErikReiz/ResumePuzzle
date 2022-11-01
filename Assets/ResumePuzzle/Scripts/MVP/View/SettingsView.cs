@@ -47,6 +47,11 @@ namespace ResumePuzzle.UI.View
 			musicSlider.onValueChanged.RemoveListener(settingsPresenter.ChangeMusicVolume);
 		}
 
+		private float SliderVolemeFromMixer(float volume)
+		{
+			return Mathf.Pow(10, volume / 20);
+		}
+
 		public Task Show()
 		{
 			return transform.DOLocalMoveX(0, tweeningLength).AsyncWaitForCompletion();
@@ -57,12 +62,12 @@ namespace ResumePuzzle.UI.View
 			return transform.DOLocalMoveX(-IView.offScreenCoordinates, tweeningLength).AsyncWaitForCompletion();
 		}
 
-		public void SetSettingsView(SettingsSaveData settingsPresset)
+		public void SetSettingsView(ref SettingsSaveData settingsPresset)
 		{
 			resolutionSlider.value = settingsPresset.ResolutionScale;
 			qualityDropdown.value = settingsPresset.QualityPresset;
-			soundSlider.value = settingsPresset.SoundVolume;
-			musicSlider.value = settingsPresset.MusicVolume;
+			soundSlider.value = SliderVolemeFromMixer(settingsPresset.SoundVolume);
+			musicSlider.value = SliderVolemeFromMixer(settingsPresset.MusicVolume);
 
 			qualityDropdown.RefreshShownValue();
 		}

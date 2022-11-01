@@ -18,6 +18,8 @@ namespace ResumePuzzle.Containers
 			#region MODELDS
 			Container.Bind<ISaveDataModel>().To<SaveDataModel>().AsSingle().NonLazy();
 			Container.Bind<ILoadLevelModel>().To<LoadLevelModel>().AsSingle().NonLazy();
+			Container.Bind<IGameSettingsModel>().To<GameSettingsModel>().AsSingle().NonLazy();
+
 			Container.Bind<IAddresableLoaderModel>().To<LocalAddresableLoaderModel>()
 				.AsSingle().WhenInjectedInto(typeof(LoadingScreenFactory)).NonLazy();
 			#endregion
