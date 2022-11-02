@@ -1,6 +1,8 @@
 using ResumePuzzle.Interfaces;
+using ResumePuzzle.Data;
 using UnityEngine;
 using Zenject;
+using ResumePuzzle.Model;
 
 namespace ResumePuzzle.Managers
 {
@@ -8,11 +10,15 @@ namespace ResumePuzzle.Managers
 	{
 		#region FIELDS
 		[Inject] private ILoadLevelModel loadLevelModel;
+		[Inject] private ISaveDataModel saveModel;
+		[Inject] private IGameSettingsModel gameSettingsModel;
 		#endregion
 
-		private void Awake()
+		private void Start()
 		{
 			Application.targetFrameRate = 60;
+
+			gameSettingsModel.InitializeSettings(saveModel.LoadData<SettingsSaveData>());
 			loadLevelModel.LoadMainMenu();
 		}
 	}
