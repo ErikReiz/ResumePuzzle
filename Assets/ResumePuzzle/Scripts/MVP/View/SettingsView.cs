@@ -66,8 +66,8 @@ namespace ResumePuzzle.UI.View
 		{
 			resolutionSlider.value = settingsPresset.ResolutionScale;
 			qualityDropdown.value = settingsPresset.QualityPresset;
-			soundSlider.value = SliderVolemeFromMixer(settingsPresset.SoundVolume);
-			musicSlider.value = SliderVolemeFromMixer(settingsPresset.MusicVolume);
+			soundSlider.value = settingsPresset.SoundVolume;
+			musicSlider.value = settingsPresset.MusicVolume;
 
 			qualityDropdown.RefreshShownValue();
 		}

@@ -9,17 +9,13 @@ namespace ResumePuzzle.Interfaces
 		#endregion
 
 		#region METHODS
+		void InitializeSettings(SettingsSaveData savedSettings);
 		void ApplySettings();
-		void ApplySettings(SettingsSaveData loadedSettings);
-		ref SettingsSaveData SetSettings();
-
 
 		void ChangeResolutionScale(float scale);
-		public void ChangeGraphicPresset(int pressetID);
+		void ChangeGraphicPresset(int pressetID);
 		void ChangeSoundVolume(float volume);
 		void ChangeMusicVolume(float volume);
-
-		bool AreSettingsValid();
 		#endregion
 	}
 }

@@ -1,5 +1,7 @@
 using ResumePuzzle.Data;
 using ResumePuzzle.Interfaces;
+using ResumePuzzle.Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using Zenject;
@@ -23,21 +25,14 @@ namespace ResumePuzzle.Model
 		private SettingsSaveData settingsPresset;
 		#endregion
 
-		private float GetVolumeOfGroup(string audioGroup)
-		{
-			audioMixer.GetFloat(audioGroup, out float volume);
-
-			return volume;
-		}
-
 		private float MixerVolumeFromSlider(float volume)
 		{
 			return Mathf.Log10(volume) * 20;
 		}
 
-		public void ApplySettings(SettingsSaveData loadedSettings)
+		public void InitializeSettings(SettingsSaveData savedSettings)
 		{
-			settingsPresset = loadedSettings;
+			settingsPresset = savedSettings;
 			ApplySettings();
 		}
 
@@ -45,49 +40,28 @@ namespace ResumePuzzle.Model
 		{
 			QualitySettings.SetQualityLevel(settingsPresset.QualityPresset);
 			QualitySettings.resolutionScalingFixedDPIFactor = settingsPresset.ResolutionScale;
-			audioMixer.SetFloat(soundGroup, settingsPresset.SoundVolume);
-			audioMixer.SetFloat(musicGroup, settingsPresset.MusicVolume);
-
-			settingsPresset.IsValid = true;
-		}
-
-		public ref SettingsSaveData SetSettings()
-		{
-			settingsPresset.ResolutionScale = QualitySettings.resolutionScalingFixedDPIFactor;
-			settingsPresset.QualityPresset = QualitySettings.GetQualityLevel();
-
-			settingsPresset.SoundVolume = GetVolumeOfGroup(soundGroup);
-			settingsPresset.MusicVolume = GetVolumeOfGroup(musicGroup);
-
-			return ref settingsPresset;
+			audioMixer.SetFloat(soundGroup, MixerVolumeFromSlider(settingsPresset.SoundVolume));
+			audioMixer.SetFloat(musicGroup, MixerVolumeFromSlider(settingsPresset.MusicVolume));
 		}
 
 		public void ChangeResolutionScale(float scale)
 		{
-			QualitySettings.resolutionScalingFixedDPIFactor = scale;
+			settingsPresset.ResolutionScale = scale;
 		}
 
 		public void ChangeGraphicPresset(int pressetID)
 		{
-			float dpi = QualitySettings.resolutionScalingFixedDPIFactor;
-			QualitySettings.SetQualityLevel(pressetID);
-			QualitySettings.resolutionScalingFixedDPIFactor = dpi;
+			settingsPresset.QualityPresset = pressetID;
 		}
 
 		public void ChangeSoundVolume(float volume)
 		{
-			audioMixer.SetFloat(soundGroup, MixerVolumeFromSlider(volume));
+			settingsPresset.SoundVolume = volume;
 		}
 
 		public void ChangeMusicVolume(float volume)
 		{
-			audioMixer.SetFloat(musicGroup, MixerVolumeFromSlider(volume));
+			settingsPresset.MusicVolume = volume;
 		}
-
-		public bool AreSettingsValid()
-		{
-			return settingsPresset.IsValid;
-		}
-
 	}
 }

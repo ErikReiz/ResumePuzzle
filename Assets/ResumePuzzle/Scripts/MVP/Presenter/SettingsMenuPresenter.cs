@@ -15,24 +15,15 @@ namespace ResumePuzzle.UI.Presenter
 		[Inject] private IGameSettingsModel gameSettingsModel;
 		#endregion
 
-		private void LoadSettings()
-		{
-			if (gameSettingsModel.AreSettingsValid())
-				gameSettingsModel.ApplySettings();
-			else
-				gameSettingsModel.ApplySettings(saveDataModel.LoadData<SettingsSaveData>());
-
-			settingsView.SetSettingsView(ref gameSettingsModel.Settings);
-		}
-
 		private void SaveSettings()
 		{
-			saveDataModel.SaveData(gameSettingsModel.SetSettings());
+			gameSettingsModel.ApplySettings();
+			saveDataModel.SaveData(gameSettingsModel.Settings);
 		}
 
 		public void Run()
 		{
-			LoadSettings();
+			settingsView.SetSettingsView(ref gameSettingsModel.Settings);
 			settingsView.Show();
 		}
 

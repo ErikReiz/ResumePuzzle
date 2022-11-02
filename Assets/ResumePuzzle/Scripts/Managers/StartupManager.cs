@@ -2,6 +2,7 @@ using ResumePuzzle.Interfaces;
 using ResumePuzzle.Data;
 using UnityEngine;
 using Zenject;
+using ResumePuzzle.Model;
 
 namespace ResumePuzzle.Managers
 {
@@ -13,11 +14,11 @@ namespace ResumePuzzle.Managers
 		[Inject] private IGameSettingsModel gameSettingsModel;
 		#endregion
 
-		private void Awake()
+		private void Start()
 		{
 			Application.targetFrameRate = 60;
 
-			gameSettingsModel.ApplySettings(saveModel.LoadData<SettingsSaveData>());
+			gameSettingsModel.InitializeSettings(saveModel.LoadData<SettingsSaveData>());
 			loadLevelModel.LoadMainMenu();
 		}
 	}
